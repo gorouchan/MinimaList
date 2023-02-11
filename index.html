@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="chrome">
+        <img
+          class="chrome--icon"
+          src="img/chrome.svg"
+          alt="Get chrome extension"
+        />
+        <p class="chrome--description">Get the Chrome extension</p>
+      </div>
+      <div class="settings">
+        <img
+          class="volume volume--on"
+          src="img/volume-on.svg "
+          alt="volume on"
+        />
+        <img class="settings--icon" src="img/settings.svg" alt="settings" />
+      </div>
+    </header>
+    <main>
+      <h1>You have 1 task today</h1>
+      <div class="task">
+        <div>
+          <input
+            type="text"
+            class="task--input"
+            placeholder="Type a new task"
+          />
+        </div>
+
+        <button class="task--btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-corner-down-left"
+          >
+            <polyline points="9 10 4 15 9 20"></polyline>
+            <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="task--list">
+        <!-- <div class="task--item">
+          <p class="todo--item">test</p>
+          <button class="todo--btn">🗑️</button>
+        </div> -->
+      </div>
+    </main>
+  </body>
+  <script src="script.js"></script>
+</html>
