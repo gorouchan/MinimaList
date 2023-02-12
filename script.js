@@ -11,9 +11,13 @@ const todoList = [
   'Lol',
 ];
 
+//COUNT TODO ITEMS
+let items = 0;
 const taskCount = function () {
-  document.querySelector('h1').textContent = `You have ${todoList.length} ${
-    todoList.length <= 1 ? 'task' : 'tasks'
+  items = 0;
+  document.querySelectorAll('.task--item').forEach(() => items++);
+  document.querySelector('h1').textContent = `You have ${items} ${
+    items <= 1 ? 'task' : 'tasks'
   } today`;
 };
 
@@ -22,12 +26,9 @@ const delTodo = function () {
   document.querySelectorAll('.todo--btn').forEach(btn =>
     btn.addEventListener('click', function (e) {
       const todoItemEl = e.target.closest('.task--item');
-      // todoItemEl.remove();
-      todoList.map((todo, i) => {
-        if (todo === `${todoItemEl.textContent.slice()}`) todoList.splice(i, 1);
-        todoItemEl.remove();
-        taskCount();
-      });
+      todoItemEl.remove();
+      items--;
+      taskCount();
     })
   );
 };
@@ -58,7 +59,25 @@ const showTodo = function () {
       `<div class='task--item ' ><p class="todo--item">${todo}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
   });
+  taskCount();
 };
 showTodo();
 taskCount();
-delTodo();
+
+const settingsIcon = document.querySelector('.settings--icon');
+const settingsPopup = document.querySelector('.settings--popup');
+const mainOverlay = document.querySelector('main');
+const html = document.querySelector('html');
+const settingsOpen = settingsIcon.addEventListener('click', function () {
+  settingsPopup.classList.remove('hidden');
+  html.style.transform = 'translateX(-30%)';
+  mainOverlay.classList.add('overlay');
+});
+
+// const settingsClose = document.addEventListener('click', function (e) {
+//   if (e.target != settingsPopup) {
+//     html.style.transform = 'translateX(0%)';
+//     settingsPopup.classList.remove('hidden');
+//     mainOverlay.classList.remove('overlay');
+//   }
+// });
