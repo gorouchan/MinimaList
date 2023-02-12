@@ -6,9 +6,9 @@ const taskItems = document.querySelectorAll('.task--item');
 const todoItem = document.querySelector('.todo--item');
 const todoBtn = document.querySelectorAll('.todo--btn');
 const todoList = [
-  'I ddddddddddddddddddddddddddddddddddddd',
-  'I eeeeeeeeeeeeeeeeeeee ',
-  'test test test',
+  `I'm going for a walk with cocoa-chan at 6:00PM`,
+  `I'm gonna see Avatar 2 with Sophia`,
+  'Finish homeworks by Friday',
 ];
 const tasksMain = function () {
   //COUNT TODO ITEMS
@@ -69,37 +69,41 @@ tasksMain();
 
 // DATE
 const getDate = () => {
-  const newDate = new Date();
-
-  const month = newDate.getMonth() + 1;
-  const d = newDate.getDate();
-
-  return (document.querySelector('.date').textContent = `${month
-    .toString()
-    .padStart(2, '0')} / ${d.toString().padStart(2, '0')} `);
+  const date = new Date();
+  const newDate = new Intl.DateTimeFormat('en-US', {
+    dateStyle: 'full',
+  }).format(date);
+  return (document.querySelector('.date').textContent = newDate
+    .slice(0, -6)
+    .toUpperCase());
 };
-
 getDate();
-setInterval(() => {
-  getDate();
-}, 1000);
-console.log(Date.parse(Date()));
 
 //SETTINGS POPUP
 const settingsIcon = document.querySelector('.settings--icon');
 const settingsPopup = document.querySelector('.settings--popup');
-const mainOverlay = document.querySelector('main');
 const html = document.querySelector('html');
+const overlay = document.querySelector('.overlay');
+
+const header = document.querySelector('header');
+const body = document.querySelector('body');
+
 const settingsOpen = settingsIcon.addEventListener('click', function () {
   settingsPopup.classList.remove('hidden');
-  html.style.transform = 'translateX(-30%)';
-  mainOverlay.classList.add('overlay');
+  settingsPopup.style.cssText = `animation:slide-in 1s ease;
+      animation-fill-mode: forwards;`;
+  body.style.transform = 'translateX(-25%)';
+  overlay.classList.remove('hidden');
 });
 
-// const settingsClose = document.addEventListener('click', function (e) {
-//   if (e.target != settingsPopup) {
-//     html.style.transform = 'translateX(0%)';
-//     settingsPopup.classList.remove('hidden');
-//     mainOverlay.classList.remove('overlay');
-//   }
-// });
+const settingsClose = window.addEventListener('click', function (e) {
+  if (e.target === overlay) {
+    settingsPopup.style.cssText = `animation:slide-out 1s ease;
+            animation-fill-mode: forwards;`;
+    body.style.transform = 'translateX(0%)';
+    overlay.classList.add('hidden');
+    setTimeout(() => {
+      settingsPopup.classList.add('hidden');
+    }, 500);
+  }
+});

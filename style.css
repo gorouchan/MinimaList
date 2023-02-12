@@ -1,35 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+
 html {
-  background-color: rgb(15, 13, 13);
+  background-color: rgb(37, 37, 37);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 body {
   margin: 0;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.5s ease;
 }
 header {
+  padding: 30px;
   display: flex;
   justify-content: space-between;
 }
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   color: azure;
-  padding-top: 55px;
 }
 .chrome {
   display: flex;
   color: rgb(194, 194, 194);
+  width: 30%;
+  gap: 15px;
 }
 .chrome--description {
   padding-left: 0.5rem;
   padding-top: 0.2rem;
   margin: 0;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
 }
 .settings {
   display: flex;
-  gap: 15px;
+  width: 30px;
+  height: 30px;
+  gap: 30px;
+  padding-right: 5rem;
+  z-index: 5;
 }
 .volume--on:hover {
   transform: scale(1.2);
@@ -44,23 +63,25 @@ main {
 
 .task {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: whitesmoke;
+  justify-content: space-between;
+  background-color: rgb(240, 240, 240);
   border-radius: 20px;
-  width: 50vw;
   margin: 0;
   margin-bottom: 10px;
+  width: 50vw;
+  overflow: hidden;
 }
 
 .task--input {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  padding-left: 3rem;
   border-style: none;
   background-color: transparent;
   font-size: 25px;
-  padding-left: 3rem;
-  width: 100%;
+  font-family: 'Work Sans', sans-serif;
+  width: 40vw;
 }
 .task--input:focus {
   outline: none;
@@ -68,11 +89,9 @@ main {
 
 .task--btn {
   border-style: none;
-  padding-right: 2.5rem;
+  padding-right: 1rem;
   cursor: pointer;
   background-color: transparent;
-  width: 25px;
-  height: 25px;
 }
 
 .task--list {
@@ -80,6 +99,7 @@ main {
   border-radius: 20px;
   color: black;
   width: 50vw;
+  margin-top: 1.3rem;
 }
 
 .task--item {
@@ -89,7 +109,7 @@ main {
   line-height: 2rem;
   font-size: 25px;
   margin: 0;
-  padding: 0;
+  padding-top: 0.3rem;
 }
 
 .task--item button {
@@ -97,12 +117,80 @@ main {
   cursor: pointer;
   background-color: transparent;
   padding-right: 1rem;
+  z-index: 2;
 }
 .todo--item {
   margin: 0;
   padding: 0.5rem;
   padding-left: 3rem;
+  font-size: 20px;
+  font-family: 'Work Sans', sans-serif;
 }
-.todo--btn {
+
+.settings--popup {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  right: 0;
+  top: 0;
+  width: 25%;
+  background-color: rgb(43, 43, 43);
+  z-index: 6;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.settings--header {
+  font-size: 25px;
+  font-family: 'Roboto Slab', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  color: white;
+}
+.hidden {
+  display: none;
+}
+
+.overlay {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
   z-index: 5;
+  width: 100vw;
+  height: 100vh;
+}
+
+.date {
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 35px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.3rem;
+
+  margin-bottom: 3rem;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes slide-out {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
