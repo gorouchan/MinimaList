@@ -107,3 +107,19 @@ const settingsClose = window.addEventListener('click', function (e) {
     }, 500);
   }
 });
+
+// BACKGROUND CHANGE
+
+const figures = document.querySelectorAll('.figure');
+
+figures.forEach(figure =>
+  figure.addEventListener('click', function (e) {
+    if (e.target.classList.contains('bg--img')) {
+      body.style.filter = 'blur(5px)';
+      setTimeout(() => {
+        body.style.filter = '';
+        html.style.backgroundImage = `url(${e.target.src})`;
+      }, 1000);
+    }
+  })
+);
