@@ -67,12 +67,21 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(240, 240, 240);
-  border-radius: 20px;
+  background-color: rgba(212, 212, 212, 0.541);
+  border-radius: 15px;
   margin: 0;
   margin-bottom: 10px;
   width: 50vw;
   overflow: hidden;
+  transition: all 0.5s ease-in;
+}
+.hover {
+  background-color: rgb(212, 212, 212);
+  transition: all 0.5s ease-in;
+}
+.task:hover {
+  background-color: rgb(212, 212, 212);
+  transition: all 0.5s ease-in;
 }
 
 .task--input {
@@ -94,26 +103,39 @@ main {
   padding-right: 1rem;
   cursor: pointer;
   background-color: transparent;
+  outline: none;
 }
 
 .task--list {
-  background-color: whitesmoke;
-  border-radius: 20px;
+  background-color: transparent;
   color: black;
   width: 50vw;
   margin-top: 1.3rem;
+  transition: all 0.5s ease-in;
 }
 
 .task--item {
+  background-color: rgba(212, 212, 212, 0.541);
   display: flex;
   justify-content: space-between;
   align-items: center;
   line-height: 2rem;
   font-size: 25px;
-  margin: 0;
-  padding-top: 0.3rem;
+  margin-top: 0.3rem;
+  max-height: 50rem;
+  border-radius: 15px;
+  transform: translateX(150%);
+  transition: all 0.6s cubic-bezier(0.34, -0.03, 0.94, -0.33);
+  opacity: 0;
 }
-
+.show {
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0, 0.75, 0.1, 1.27);
+  transform: translateX(0%);
+}
+.task--item:hover {
+  background-color: rgb(212, 212, 212);
+}
 .task--item button {
   border-style: none;
   cursor: pointer;
