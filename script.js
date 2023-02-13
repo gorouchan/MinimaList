@@ -65,7 +65,17 @@ const addTask = function () {
     );
     taskCount();
     delTodo();
-    darkOrLight();
+    //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
+    taskInputText.focus();
+    // COPYING FROM darkOrLight() so it's not too CPU extensive
+    document
+      .querySelectorAll('.todo--item')
+      .forEach(item => (item.style.color = light ? 'white' : 'black'));
+    document
+      .querySelectorAll('.task--item')
+      .forEach(
+        task => (task.style.backgroundColor = light ? '#212121' : 'white')
+      );
   }, 15);
   setTimeout(() => {
     fadeOut();
@@ -244,7 +254,6 @@ darkOrLight = () => {
   dateHeader.style.color = light ? 'black' : 'white';
   taskHeader.style.color = light ? 'black' : 'white';
 
-  // svg.forEach(svg => (svg.style.stroke = light ? 'black' : 'white'));
   changeCSS();
 
   taskBox.style.backgroundColor = light ? '#212121' : 'white';
