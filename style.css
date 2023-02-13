@@ -3,15 +3,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 html {
-  background-color: rgb(37, 37, 37);
+  background-color: black;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
-  background-image: url(img/pic2.jpg);
-  background-size: cover;
+  overflow: hidden;
+}
+.html--bg {
+  object-fit: cover;
+  object-position: center;
+  background-repeat: no-repeat;
+  z-index: -5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110%;
 }
 body {
   margin: 0;
@@ -67,7 +81,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(212, 212, 212, 0.541);
+  background-color: rgba(212, 212, 212, 0.401);
   border-radius: 15px;
   margin: 0;
   margin-bottom: 10px;
@@ -76,11 +90,11 @@ main {
   transition: all 0.5s ease-in;
 }
 .hover {
-  background-color: rgb(212, 212, 212);
+  background-color: rgb(255, 255, 255);
   transition: all 0.5s ease-in;
 }
 .task:hover {
-  background-color: rgb(212, 212, 212);
+  background-color: rgb(255, 255, 255);
   transition: all 0.5s ease-in;
 }
 
@@ -115,7 +129,7 @@ main {
 }
 
 .task--item {
-  background-color: rgba(212, 212, 212, 0.541);
+  background-color: rgba(212, 212, 212, 0.4);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,7 +148,7 @@ main {
   transform: translateX(0%);
 }
 .task--item:hover {
-  background-color: rgb(212, 212, 212);
+  background-color: white;
 }
 .task--item button {
   border-style: none;
@@ -154,83 +168,118 @@ main {
 .settings--popup {
   position: absolute;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
   right: 0;
   top: 0;
-  width: 25%;
-  background-color: rgb(43, 43, 43);
+  margin: 0;
+  width: 500px;
+  background-color: black;
   z-index: 6;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
+.hidden {
+  display: none;
+}
 .settings--header {
-  font-size: 25px;
+  font-size: 2rem;
   font-family: 'Roboto Slab', sans-serif;
   font-weight: 600;
   letter-spacing: 0.1rem;
   color: white;
 }
-.gallery--header {
+.gallery--header,
+.theme--header {
   color: white;
   font-family: 'Roboto Slab', sans-serif;
   letter-spacing: 0.1rem;
-  text-align: center;
+  font-weight: 600;
+  align-self: flex-start;
+  padding-left: 2rem;
+  margin-bottom: 0.5rem;
 }
-
-section {
+.gallery--header {
+  margin-top: 3rem;
+}
+.theme--container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-}
-figure {
-  display: flex;
-  flex-wrap: wrap;
-  object-fit: contain;
-  justify-content: center;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-figure img {
-  width: 75%;
-  border: 3px solid transparent;
+  background: rgb(20, 20, 20);
+  width: 90%;
+  padding: 0.6rem;
   border-radius: 10px;
-  outline: 3px solid rgb(0, 121, 121);
-  cursor: pointer;
 }
-figcaption {
-  padding: 0.8rem;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  color: antiquewhite;
-}
-.slider--btn {
-  cursor: pointer;
+.theme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
+  width: 33.33%;
+  padding: 0.7rem 0.5rem;
   border-style: none;
-  font-size: 35px;
-  margin: 0;
-  padding: 0;
-  color: rgb(255, 255, 255);
-  transition-duration: 0.2s;
-}
-.slider--btn:hover {
-  transform: scale(1.3);
-}
-.prev--slide {
-  padding-right: 0.3rem;
-}
-.next--slide {
-  padding-left: 0.3rem;
-}
-.hidden {
-  display: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
+.theme--active {
+  background-color: rgb(37, 37, 37);
+  transition: all 0.5s ease-in-out;
+}
+
+/* 
+.img--container {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+.container--active {
+  opacity: 1;
+}
+.bg--img {
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  width: 80%;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+  outline: 3px solid rgb(0, 121, 121);
+}
+.slider--btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;ss
+
+  position: absolute;
+  transform: translate(0%, 200%);
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  border-style: none;
+  outline-style: hidden;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+}
+.slider--btn:hover {
+  background-color: rgba(255, 255, 255, 0.281);
+  transition: background-color 0.5s;
+}
+.next--slide {
+  right: 0.2rem;
+}
+.prev--slide {
+  left: 0.2rem;
+}
+ */
 .overlay {
   background-color: transparent;
   position: absolute;

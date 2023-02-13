@@ -110,46 +110,77 @@ const getDate = () => {
 getDate();
 
 //SETTINGS POPUP
-const settingsIcon = document.querySelector('.settings--icon');
-const settingsPopup = document.querySelector('.settings--popup');
-const html = document.querySelector('html');
-const overlay = document.querySelector('.overlay');
+const settingsConfig = function () {
+  const settingsIcon = document.querySelector('.settings--icon');
+  const settingsPopup = document.querySelector('.settings--popup');
+  const html = document.querySelector('html');
+  const overlay = document.querySelector('.overlay');
 
-const header = document.querySelector('header');
-const body = document.querySelector('body');
+  const header = document.querySelector('header');
+  const body = document.querySelector('body');
 
-const settingsOpen = settingsIcon.addEventListener('click', function () {
-  settingsPopup.classList.remove('hidden');
-  settingsPopup.style.cssText = `animation:slide-in 1s ease;
+  const settingsOpen = settingsIcon.addEventListener('click', function () {
+    settingsPopup.classList.remove('hidden');
+    settingsPopup.style.cssText = `animation:slide-in 1s ease;
       animation-fill-mode: forwards;`;
-  body.style.transform = 'translateX(-25%)';
-  overlay.classList.remove('hidden');
-});
+    body.style.transform = 'translateX(-500px)';
+    overlay.classList.remove('hidden');
+  });
 
-const settingsClose = window.addEventListener('click', function (e) {
-  if (e.target === overlay) {
-    settingsPopup.style.cssText = `animation:slide-out 1s ease;
+  const settingsClose = window.addEventListener('click', function (e) {
+    if (e.target === overlay) {
+      settingsPopup.style.cssText = `animation:slide-out 1s ease;
             animation-fill-mode: forwards;`;
-    body.style.transform = 'translateX(0%)';
-    overlay.classList.add('hidden');
-    setTimeout(() => {
-      settingsPopup.classList.add('hidden');
-    }, 500);
-  }
-});
+      body.style.transform = 'translateX(0%)';
+      overlay.classList.add('hidden');
+      setTimeout(() => {
+        settingsPopup.classList.add('hidden');
+      }, 500);
+    }
+  });
+};
+settingsConfig();
 
 // BACKGROUND CHANGE
+// const imgContainer = document.querySelectorAll('.img--container');
 
-const figures = document.querySelectorAll('.figure');
+// imgContainer.forEach(container =>
+//   container.addEventListener('click', function (e) {
+//     console.log(e.target.dataset.src);
+//     if (e.target.classList.contains('bg--img')) {
+//       const htmlBackground = document.querySelector('.html--bg');
+//       htmlBackground.style.filter = 'blur(10px)';
+//       htmlBackground.src = `${e.target.dataset.src}`;
+//       htmlBackground.addEventListener(
+//         'load',
+//         () => (htmlBackground.style.filter = '')
+//       );
+//     }
+//   })
+// );
 
-figures.forEach(figure =>
-  figure.addEventListener('click', function (e) {
-    if (e.target.classList.contains('bg--img')) {
-      body.style.filter = 'blur(5px)';
-      setTimeout(() => {
-        body.style.filter = '';
-        html.style.backgroundImage = `url(${e.target.src})`;
-      }, 1000);
-    }
+// const nextSlideBtn = document.querySelector('.next--slide');
+// const prevSlideBtn = document.querySelector('.prev--slide');
+
+// nextSlideBtn.addEventListener('click', function () {});
+// prevSlideBtn.addEventListener('click', function () {});
+
+// // imgContainer.forEach(
+// //   (container, i) => (container.style.transform = `translateX(${i * 100}%)`)
+// // );
+
+// CHANGE THEMES
+
+const themes = document.querySelectorAll('.theme');
+
+themes.forEach(theme =>
+  theme.addEventListener('click', function (e) {
+    themes.forEach(theme => theme.classList.remove('theme--active'));
+    const targetBtn = e.target.closest('button');
+    targetBtn.classList.add('theme--active');
+
+    // setTimeout(() => {
+    //   e.target.closest('button').classList.add('theme--active');
+    // }, 500);
   })
 );
