@@ -9,23 +9,19 @@
   box-sizing: border-box;
 }
 html {
-  background-color: black;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 .html--bg {
   object-fit: cover;
-  object-position: center;
-  background-repeat: no-repeat;
   z-index: -5;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 110%;
-  height: 110%;
+  left: 0px;
+  width: calc(100% + 30px);
+  height: 100vh;
 }
 body {
   margin: 0;
@@ -45,26 +41,35 @@ main {
   align-items: center;
   color: azure;
 }
+.todo--btn {
+  color: white;
+}
 .chrome {
   display: flex;
-  color: whitesmoke;
   width: 30%;
   gap: 15px;
 }
+.chrome--icon {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+  background-color: transparent;
+}
 .chrome--description {
-  padding-left: 0.5rem;
-  padding-top: 0.2rem;
+  color: white;
   margin: 0;
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
 }
 .settings {
   display: flex;
-  width: 30px;
-  height: 30px;
   gap: 30px;
-  padding-right: 5rem;
   z-index: 5;
+}
+.volume--on,
+.settings--icon {
+  background-color: transparent;
+  border-style: none;
 }
 .volume--on:hover {
   transform: scale(1.2);
@@ -81,20 +86,21 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(212, 212, 212, 0.401);
+  background-color: white;
   border-radius: 15px;
   margin: 0;
   margin-bottom: 10px;
   width: 50vw;
   overflow: hidden;
   transition: all 0.5s ease-in;
+  opacity: 0.5;
 }
 .hover {
-  background-color: rgb(255, 255, 255);
+  opacity: 1;
   transition: all 0.5s ease-in;
 }
 .task:hover {
-  background-color: rgb(255, 255, 255);
+  opacity: 1;
   transition: all 0.5s ease-in;
 }
 
@@ -108,6 +114,10 @@ main {
   font-family: 'Work Sans', sans-serif;
   width: 40vw;
 }
+.task--input::placeholder {
+  color: black;
+}
+
 .task--input:focus {
   outline: none;
 }
@@ -129,7 +139,7 @@ main {
 }
 
 .task--item {
-  background-color: rgba(212, 212, 212, 0.4);
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -139,15 +149,17 @@ main {
   max-height: 50rem;
   border-radius: 15px;
   transform: translateX(150%);
-  transition: all 0.6s cubic-bezier(0.34, -0.03, 0.94, -0.33);
-  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.34, -0.03, 0.94, -0.33);
+  opacity: 0.5;
 }
 .show {
-  opacity: 1;
-  transition: all 0.3s cubic-bezier(0.54, 0.11, 0.8, 0.97);
+  /* opacity: 1; */
+  transition: all 0.5s cubic-bezier(0.54, 0.11, 0.8, 0.97);
   transform: translateX(0%);
 }
+
 .task--item:hover {
+  opacity: 1;
   background-color: white;
 }
 .task--item button {
@@ -183,6 +195,7 @@ main {
 .hidden {
   display: none;
 }
+
 .settings--header {
   font-size: 2rem;
   font-family: 'Roboto Slab', sans-serif;
@@ -224,11 +237,17 @@ main {
   cursor: pointer;
 }
 
-.theme--active {
+.theme--active--dark {
   background-color: rgb(37, 37, 37);
   transition: all 0.5s ease-in-out;
 }
-
+/* svg {
+  stroke: black;
+} */
+.theme--active--light {
+  background-color: #c8c6c6;
+  transition: all 0.5s ease-in-out;
+}
 /* 
 .img--container {
   display: flex;
@@ -302,7 +321,6 @@ h1 {
   font-size: 35px;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.3rem;
-
   margin-bottom: 3rem;
 }
 
