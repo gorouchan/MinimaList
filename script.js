@@ -278,7 +278,9 @@ darkOrLight = () => {
     );
   //// BACKGROUND
   htmlBackground.style.filter = 'blur(10px)';
-  htmlBackground.src = light ? 'img/white-bg.jpg' : 'img/dark-bg.jpg';
+  htmlBackground.src = light
+    ? 'https://unsplash.com/photos/FIKD9t5_5zQ'
+    : 'https://unsplash.com/photos/DjlKxYFJlTc';
   htmlBackground.addEventListener(
     'load',
     () => (htmlBackground.style.filter = '')
