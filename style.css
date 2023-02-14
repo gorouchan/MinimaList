@@ -240,6 +240,47 @@ main {
   padding: 0.6rem;
   border-radius: 10px;
 }
+.theme--description {
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1rem;
+  color: white;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.upload--description,
+.light--description,
+.dark--description {
+  transition: opacity 0.5s;
+  margin: 0;
+  padding: 0;
+}
+.upload--description {
+  position: absolute;
+  white-space: nowrap;
+  top: 0.1rem;
+  left: -12.7rem;
+  opacity: 0;
+}
+.light--description {
+  position: absolute;
+  white-space: nowrap;
+  top: 0.1rem;
+  left: -3.1rem;
+  opacity: 0;
+}
+.dark--description {
+  position: absolute;
+  white-space: nowrap;
+  top: 0.1rem;
+  left: 6.15rem;
+  opacity: 0;
+}
+.description--active {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
 .theme {
   display: flex;
   justify-content: center;
@@ -253,14 +294,18 @@ main {
 }
 .theme--active--dark {
   background-color: rgb(71, 71, 71);
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .theme--active--light {
   background-color: #f5f5f5;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-
+.gallery--mode {
+  background: center no-repeat url('img/gallery-white.svg');
+  outline-style: none;
+  z-index: 4;
+}
 .slider--container {
   display: flex;
   position: relative;
@@ -354,7 +399,7 @@ main {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
   top: 20.2rem;
-  left: 9rem;
+  left: 8.5rem;
   text-decoration: none;
   margin-top: -1rem;
   padding-left: 0;

@@ -161,27 +161,20 @@ settingsConfig();
 
 // CHANGE THEMES ICON ACTIVE
 
-const themes = document.querySelectorAll('.theme');
+const modes = document.querySelectorAll('.mode');
+
 const themeActiveReset = () => {
-  themes.forEach(theme => theme.classList.remove('theme--active--dark'));
-  themes.forEach(theme => theme.classList.remove('theme--active--light'));
+  modes.forEach(theme => theme.classList.remove('theme--active--dark'));
+  modes.forEach(theme => theme.classList.remove('theme--active--light'));
 };
 
-themes.forEach(theme =>
+modes.forEach(theme =>
   theme.addEventListener('click', function (e) {
-    themeActiveReset();
     const targetBtn = e.target.closest('button');
-
-    // ACTIVATE DARK THEME OR LIGHT THEME DEPENDING ON THE ACTIVE ONE
-    if (targetBtn.classList.contains('gallery--mode')) {
-      light
-        ? targetBtn.classList.add('theme--active--light')
-        : targetBtn.classList.add('theme--active--dark');
-    } else {
-      targetBtn.classList.contains('night--mode')
-        ? targetBtn.classList.add('theme--active--dark')
-        : targetBtn.classList.add('theme--active--light');
-    }
+    themeActiveReset();
+    targetBtn.classList.contains('night--mode')
+      ? targetBtn.classList.add('theme--active--dark')
+      : targetBtn.classList.add('theme--active--light');
   })
 );
 
@@ -205,7 +198,7 @@ const svg = document.querySelectorAll('.svg--alter');
 const dateHeader = document.querySelector('.date');
 const taskHeader = document.querySelector('h1');
 const chromeDescription = document.querySelector('.chrome--description');
-
+const themeDescription = document.querySelector('.theme--description');
 const sliderBtn = document.querySelector('.slider--btn');
 const css = document.createElement('style');
 
@@ -215,6 +208,36 @@ const changeCSS = () => {
   };}`;
   document.body.append(css);
 };
+
+////// THEME SELECTOR HOVER DESCRIPTION ///////
+const uploadIcon = document.querySelector('.gallery--mode');
+const uploadDescription = document.querySelector('.upload--description');
+const lightIcon = document.querySelector('.light--mode');
+const lightDescription = document.querySelector('.light--description');
+const darkIcon = document.querySelector('.night--mode');
+const darkDescription = document.querySelector('.dark--description');
+
+// Upload Icon Description
+uploadIcon.addEventListener('mouseenter', () =>
+  uploadDescription.classList.add('description--active')
+);
+uploadIcon.addEventListener('mouseleave', () =>
+  uploadDescription.classList.remove('description--active')
+);
+// Light mode Icon Description
+lightIcon.addEventListener('mouseenter', () =>
+  lightDescription.classList.add('description--active')
+);
+lightIcon.addEventListener('mouseleave', () =>
+  lightDescription.classList.remove('description--active')
+);
+// Dark mode Icon Description
+darkIcon.addEventListener('mouseenter', () =>
+  darkDescription.classList.add('description--active')
+);
+darkIcon.addEventListener('mouseleave', () =>
+  darkDescription.classList.remove('description--active')
+);
 
 lightOrDark = () => {
   settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'rgb(21,21,21)';
@@ -227,13 +250,21 @@ lightOrDark = () => {
   galleryHeader.style.color = light ? '#393E46' : 'white';
   dateHeader.style.color = light ? 'black' : 'white';
   taskHeader.style.color = light ? 'black' : 'white';
+  themeDescription.style.color = light ? 'black' : 'white';
   changeCSS();
 
   taskBox.style.backgroundColor = light ? '#212121' : 'white';
   taskInputText.style.color = light ? 'white' : 'black';
+
+  //UPLOAD ICON SELECTORS
+  uploadIcon.style.background = light
+    ? `center no-repeat url('img/gallery-black.svg')`
+    : `center no-repeat url('img/gallery-white.svg')`;
+
   document.querySelector('a').style.color = light
     ? 'rgb(168, 100, 54)'
     : 'wheat';
+
   document.querySelector('.feather-corner-down-left').style.stroke = light
     ? 'white'
     : 'black';
@@ -267,11 +298,16 @@ lightMode.addEventListener('click', () => {
   dark = false;
   lightOrDark();
 });
-
 nightMode.addEventListener('click', () => {
   dark = true;
   light = false;
   lightOrDark();
+});
+
+//UPLOAD IMAGE
+uploadIcon.addEventListener('click', function (e) {
+  const userImg = document.querySelector('#imgupload').click();
+  // htmlBackground.src = userImg.value;
 });
 
 /////////  CHANGE BACKGROUND /////////////
@@ -283,11 +319,6 @@ const btnLeft = document.querySelector('.prev--slide');
 slides.forEach(img =>
   img.addEventListener('click', function (e) {
     const imgSource = e.target.dataset.img;
-
-    themeActiveReset();
-    document
-      .querySelector('.gallery--mode')
-      .classList.add(light ? 'theme--active--light' : 'theme--active--dark');
     htmlBackground.style.filter = 'blur(10px)';
     htmlBackground.src = imgSource;
     htmlBackground.addEventListener(
@@ -299,6 +330,7 @@ slides.forEach(img =>
 
 // })
 
+/////// SLIDER FUNCTION ///////
 let curSlide = 0;
 const maxSlide = slides.length;
 const dotContainer = document.querySelector('.dots');

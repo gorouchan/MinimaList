@@ -118,9 +118,9 @@
     </main>
     <div class="settings--popup hidden">
       <p class="settings--header">Settings</p>
-      <p class="theme--header">Choose a theme</p>
+      <p class="theme--header">Choose an option</p>
       <div class="theme--container">
-        <button class="theme option--1 gallery--mode">
+        <!-- <button class="theme option--1 gallery--mode">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -137,12 +137,18 @@
             <circle cx="8.5" cy="8.5" r="1.5"></circle>
             <polyline points="21 15 16 10 5 21"></polyline>
           </svg>
-        </button>
-        <button class="theme option--2 light--mode">
+        </button> -->
+        <input
+          type="button"
+          class="theme option--1 gallery--mode"
+          id="upload--img"
+        />
+        <input type="file" id="imgupload" style="display: none" />
+        <button class="theme mode light--mode">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="white"
@@ -162,11 +168,11 @@
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
         </button>
-        <button class="theme option--3 theme--active--dark night--mode">
+        <button class="theme mode theme--active--dark night--mode">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="white"
@@ -178,6 +184,11 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
+      </div>
+      <div class="theme--description">
+        <p class="upload--description">Upload image</p>
+        <p class="light--description">Light mode</p>
+        <p class="dark--description">Dark mode</p>
       </div>
       <p class="gallery--header">Choose from gallery</p>
       <div class="slider--container">
