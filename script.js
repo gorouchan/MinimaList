@@ -244,8 +244,8 @@ const changeCSS = () => {
 };
 
 darkOrLight = () => {
-  settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'black';
-  themeContainer.style.backgroundColor = light ? '#ECE8DD' : 'rgb(20, 20, 20)';
+  settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'rgb(21,21,21)';
+  themeContainer.style.backgroundColor = light ? '#ECE8DD' : 'rgb(41, 41, 41)';
   chromeDescription.style.color = light ? 'black' : 'white';
 
   settingsHeader.style.color = light ? '#393E46' : 'white';
@@ -279,7 +279,7 @@ darkOrLight = () => {
   //// BACKGROUND
   htmlBackground.style.filter = 'blur(10px)';
   htmlBackground.src = light
-    ? 'https://images.pexels.com/photos/1022923/pexels-photo-1022923.jpeg'
+    ? 'https://images.pexels.com/photos/776656/pexels-photo-776656.jpeg'
     : 'https://images.pexels.com/photos/296288/pexels-photo-296288.jpeg';
   htmlBackground.addEventListener(
     'load',
