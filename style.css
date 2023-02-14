@@ -96,13 +96,15 @@ main {
   width: 50vw;
   opacity: 0.5;
   /* overflow: hidden; */
-  /* transition: all 0.5s ease-in; */
+  transition: opacity 1s ease;
 }
 .hover {
   opacity: 1;
+  transition: opacity 0.5s ease;
 }
 .task:hover {
   opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 .task--input {
