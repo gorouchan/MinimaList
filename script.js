@@ -437,7 +437,5 @@ const ballBall = () => {
 };
 toggleContainer.addEventListener('click', function () {
   ballBall();
-  setTimeout(() => {
-    toggleBackground.classList.toggle('toggle--active');
-  }, 180);
+  toggleBackground.classList.toggle('toggle--active');
 });

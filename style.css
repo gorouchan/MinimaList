@@ -421,7 +421,7 @@ a {
   height: 30px;
   margin: 0;
   padding: 0;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
 }
 .toggle--ball {
   position: absolute;
@@ -438,7 +438,7 @@ a {
 }
 .toggle--active {
   background-color: #c6ac8f;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
 }
 .toggle--description {
   position: absolute;
@@ -448,7 +448,6 @@ a {
   font-weight: 600;
   font-size: 16px;
   color: white;
-  /* width: 15rem; */
   margin: 0;
   padding: 0;
 }
