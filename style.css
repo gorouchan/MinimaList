@@ -409,6 +409,49 @@ a {
   text-decoration: none;
   color: wheat;
 }
+
+.toggle--container {
+  position: absolute;
+  background-color: rgb(114, 110, 110);
+  border-radius: 30px;
+  border: 3px solid #c6ac8f;
+  top: 22rem;
+  left: 2.65rem;
+  width: 50px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s ease;
+}
+.toggle--ball {
+  position: absolute;
+  background-color: #22333b;
+  border-radius: 50%;
+  top: 354px;
+  left: 43.5px;
+  width: 26.5px;
+  height: 26.5px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s ease-in-out;
+}
+.toggle--active {
+  background-color: #c6ac8f;
+  transition: all 0.5s ease;
+}
+.toggle--description {
+  position: absolute;
+  top: 22.3rem;
+  left: 6.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  /* width: 15rem; */
+  margin: 0;
+  padding: 0;
+}
 .overlay {
   background-color: transparent;
   position: absolute;

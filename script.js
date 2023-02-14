@@ -6,6 +6,10 @@ const taskList = document.querySelector('.task--list');
 const taskItems = document.querySelectorAll('.task--item');
 const taskBox = document.querySelector('.task');
 
+const toggleContainer = document.querySelector('.toggle');
+const toggleBackground = document.querySelector('.toggle--container');
+const toggleBall = document.querySelector('.toggle--ball');
+
 const todoItem = document.querySelector('.todo--item');
 const todoBtn = document.querySelectorAll('.todo--btn');
 const todoList = [
@@ -17,6 +21,7 @@ const todoList = [
 let light;
 let dark = true;
 let lightOrDark;
+let toggleActive;
 // const tasksMain = function () {
 //COUNT TODO ITEMS
 let items = 0;
@@ -216,7 +221,7 @@ const lightIcon = document.querySelector('.light--mode');
 const lightDescription = document.querySelector('.light--description');
 const darkIcon = document.querySelector('.night--mode');
 const darkDescription = document.querySelector('.dark--description');
-
+const toggleDescription = document.querySelector('.toggle--description');
 // Upload Icon Description
 uploadIcon.addEventListener('mouseenter', () =>
   uploadDescription.classList.add('description--active')
@@ -243,18 +248,18 @@ lightOrDark = () => {
   settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'rgb(21,21,21)';
   themeContainer.style.backgroundColor = light ? '#ECE8DD' : 'rgb(41, 41, 41)';
   chromeDescription.style.color = light ? 'black' : 'white';
+  taskBox.style.backgroundColor = light ? '#212121' : 'white';
+  taskInputText.style.color = light ? 'white' : 'black';
 
-  settingsHeader.style.color = light ? '#393E46' : 'white';
-  settingsFooter.style.color = light ? '#393E46' : 'white';
-  themeHeader.style.color = light ? '#393E46' : 'white';
-  galleryHeader.style.color = light ? '#393E46' : 'white';
+  settingsHeader.style.color = light ? 'black' : 'white';
+  settingsFooter.style.color = light ? 'black' : 'white';
+  themeHeader.style.color = light ? 'black' : 'white';
+  galleryHeader.style.color = light ? 'black' : 'white';
   dateHeader.style.color = light ? 'black' : 'white';
   taskHeader.style.color = light ? 'black' : 'white';
   themeDescription.style.color = light ? 'black' : 'white';
+  toggleDescription.style.color = light ? 'black' : 'white';
   changeCSS();
-
-  taskBox.style.backgroundColor = light ? '#212121' : 'white';
-  taskInputText.style.color = light ? 'white' : 'black';
 
   //UPLOAD ICON SELECTORS
   uploadIcon.style.background = light
@@ -282,7 +287,9 @@ lightOrDark = () => {
     .forEach(
       task => (task.style.backgroundColor = light ? '#212121' : 'white')
     );
+
   //// BACKGROUND
+  if (toggleActive) return;
   htmlBackground.style.filter = 'blur(10px)';
   htmlBackground.src = light
     ? 'https://images.pexels.com/photos/776656/pexels-photo-776656.jpeg'
@@ -415,4 +422,22 @@ dotContainer.addEventListener('click', function (e) {
     goToSlide(slide);
     activateDot(slide);
   }
+});
+
+// TOGGLE DARK/LIGHT MODE AUTOMATIC BACKGROUND CHANGE
+
+const ballBall = () => {
+  if (!toggleBackground.classList.contains('toggle--active')) {
+    toggleBall.style.transform = `translateX(19.8px)`;
+    toggleActive = true;
+  } else {
+    toggleBall.style.transform = `translateX(0%)`;
+    toggleActive = false;
+  }
+};
+toggleContainer.addEventListener('click', function () {
+  ballBall();
+  setTimeout(() => {
+    toggleBackground.classList.toggle('toggle--active');
+  }, 180);
 });
