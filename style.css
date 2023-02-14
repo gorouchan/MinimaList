@@ -79,6 +79,9 @@ main {
   transition: 0.3s ease;
   cursor: pointer;
 }
+.volume--on {
+  display: none;
+}
 .settings--icon:hover {
   transform: scale(1.2);
   transition: 0.3s ease;
@@ -350,13 +353,15 @@ main {
 .pexels {
   height: 50px;
   position: absolute;
+
   top: 59rem;
-  left: 4rem;
+  left: 2rem;
 }
 .footer {
   position: absolute;
-  top: 59rem;
-  left: 12rem;
+  font-family: 'Montserrat', sans-serif;
+  top: 59.2rem;
+  left: 10rem;
 }
 .overlay {
   background-color: transparent;

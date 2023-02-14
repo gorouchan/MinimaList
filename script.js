@@ -16,7 +16,7 @@ const todoList = [
 
 let light;
 let dark = true;
-let darkOrLight;
+let lightOrDark;
 // const tasksMain = function () {
 //COUNT TODO ITEMS
 let items = 0;
@@ -67,7 +67,7 @@ const addTask = function () {
     delTodo();
     //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
     taskInputText.focus();
-    // COPYING FROM darkOrLight() so it's not too CPU extensive
+    // COPYING FROM lightOrDark() so it's not too CPU extensive
     document
       .querySelectorAll('.todo--item')
       .forEach(item => (item.style.color = light ? 'white' : 'black'));
@@ -149,8 +149,6 @@ const settingsConfig = function () {
       settingsPopup.style.animation = 'slide-out 1s ease;';
       settingsPopup.style.animationFillMode = 'forwards';
 
-      // = `animation:slide-out 1s ease;
-      //     animation-fill-mode: forwards;`;
       body.style.transform = 'translateX(0%)';
       overlay.classList.add('hidden');
       setTimeout(() => {
@@ -218,7 +216,7 @@ const changeCSS = () => {
   document.body.append(css);
 };
 
-darkOrLight = () => {
+lightOrDark = () => {
   settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'rgb(21,21,21)';
   themeContainer.style.backgroundColor = light ? '#ECE8DD' : 'rgb(41, 41, 41)';
   chromeDescription.style.color = light ? 'black' : 'white';
@@ -268,13 +266,13 @@ darkOrLight = () => {
 lightMode.addEventListener('click', () => {
   light = true;
   dark = false;
-  darkOrLight();
+  lightOrDark();
 });
 
 nightMode.addEventListener('click', () => {
   dark = true;
   light = false;
-  darkOrLight();
+  lightOrDark();
 });
 
 /////////  CHANGE BACKGROUND /////////////
