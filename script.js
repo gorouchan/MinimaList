@@ -298,3 +298,8 @@ nightMode.addEventListener('click', () => {
   light = false;
   darkOrLight();
 });
+
+// CHOOSE BACKGROUND GALLERY AND SET THE BACKGROUND IMG
+document.querySelector('background').classList.add('bacbgrkound.');
+
+document.querySelectorAll('background');

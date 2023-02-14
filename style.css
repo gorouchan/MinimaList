@@ -96,7 +96,7 @@ main {
   width: 50vw;
   opacity: 0.5;
   /* overflow: hidden; */
-  transition: opacity 1s ease;
+  transition: opacity, background-color 1s ease;
 }
 .hover {
   opacity: 1;
@@ -140,9 +140,9 @@ main {
   height: 50vh;
   width: 100%;
   overflow-y: auto;
-  overflow-x: visible;
-  padding-right: 50%;
-  transform: translateX(25%);
+  padding-right: 40%;
+  padding-left: 10%;
+  transform: translateX(15%);
 }
 
 .task--item {
@@ -159,6 +159,7 @@ main {
   transition: all 0.5s cubic-bezier(0.34, -0.03, 0.94, -0.33);
   opacity: 0.5;
 }
+
 .show {
   /* opacity: 1; */
   transition: all 0.5s cubic-bezier(0.54, 0.11, 0.8, 0.97);
@@ -176,6 +177,7 @@ main {
   padding-right: 1rem;
   z-index: 2;
 }
+
 .todo--item {
   margin: 0;
   padding: 0.5rem;
