@@ -9,8 +9,8 @@ const taskBox = document.querySelector('.task');
 const todoItem = document.querySelector('.todo--item');
 const todoBtn = document.querySelectorAll('.todo--btn');
 const todoList = [
-  `I'm going for a walk with cocoa-chan at 6:00PM`,
-  `I'm gonna see Avatar 2 with Sophia`,
+  `Take the dog for a walk before sleeping!`,
+  `Meeting at 3:00PM`,
   'Finish homeworks by Friday',
 ];
 
