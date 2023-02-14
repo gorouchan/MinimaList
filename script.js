@@ -304,10 +304,22 @@ nightMode.addEventListener('click', () => {
   lightOrDark();
 });
 
-//UPLOAD IMAGE
+//UPLOAD IMAGE LOCALLY
+const userImg = document.querySelector('#imgupload');
+let uploadedImg;
+
 uploadIcon.addEventListener('click', function (e) {
-  const userImg = document.querySelector('#imgupload').click();
-  // htmlBackground.src = userImg.value;
+  userImg.click();
+});
+document.querySelector('#imgupload').addEventListener('change', () => {
+  const reader = new FileReader();
+  console.log(userImg.files[0]);
+  reader.addEventListener('load', () => {
+    uploadedImg = reader.result;
+    console.log(uploadedImg);
+    htmlBackground.src = uploadedImg;
+  });
+  reader.readAsDataURL(userImg.files[0]);
 });
 
 /////////  CHANGE BACKGROUND /////////////

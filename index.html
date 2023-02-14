@@ -143,7 +143,15 @@
           class="theme option--1 gallery--mode"
           id="upload--img"
         />
-        <input type="file" id="imgupload" style="display: none" />
+        <form method="post" enctype="multipart/form-data">
+          <input
+            type="file"
+            id="imgupload"
+            style="display: none"
+            accept=".jpg, .jpeg, .png"
+          />
+        </form>
+
         <button class="theme mode light--mode">
           <svg
             xmlns="http://www.w3.org/2000/svg"
