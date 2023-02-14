@@ -231,10 +231,9 @@ lightOrDark = () => {
 
   taskBox.style.backgroundColor = light ? '#212121' : 'white';
   taskInputText.style.color = light ? 'white' : 'black';
-
-  document.querySelector('.pexels').src = light
-    ? 'https://images.pexels.com/lib/api/pexels.png'
-    : 'https://images.pexels.com/lib/api/pexels-white.png';
+  document.querySelector('a').style.color = light
+    ? 'rgb(168, 100, 54)'
+    : 'wheat';
   document.querySelector('.feather-corner-down-left').style.stroke = light
     ? 'white'
     : 'black';

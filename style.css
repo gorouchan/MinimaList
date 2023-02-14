@@ -350,18 +350,19 @@ main {
   opacity: 1;
 }
 
-.pexels {
-  height: 50px;
-  position: absolute;
-
-  top: 59rem;
-  left: 2rem;
-}
 .footer {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
-  top: 59.2rem;
-  left: 10rem;
+  top: 20.2rem;
+  left: 9rem;
+  text-decoration: none;
+  margin-top: -1rem;
+  padding-left: 0;
+  font-size: 14px;
+}
+a {
+  text-decoration: none;
+  color: wheat;
 }
 .overlay {
   background-color: transparent;
