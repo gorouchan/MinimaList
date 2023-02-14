@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
 *,
 *::before,
 *::after {
@@ -64,28 +64,24 @@ main {
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
 }
-.settings {
-  display: flex;
-  gap: 30px;
-  z-index: 5;
-}
-.volume--on,
+
 .settings--icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border-style: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin: 0;
+  padding: 0.4em;
 }
-.volume--on:hover {
-  transform: scale(1.2);
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-.volume--on {
-  display: none;
-}
+
 .settings--icon:hover {
   transform: scale(1.2);
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
+  background-color: #bdb2b279;
 }
 
 .task {
@@ -118,7 +114,8 @@ main {
   border-style: none;
   background-color: transparent;
   font-size: 30px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 600;
   width: 40vw;
 }
 .task--input::placeholder {
@@ -186,7 +183,8 @@ main {
   padding: 0.8rem;
   padding-left: 3rem;
   font-size: 25px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 600;
 }
 
 .settings--popup {
@@ -218,7 +216,7 @@ main {
 }
 .gallery--header,
 .theme--header,
-.footer {
+.disclaimer {
   color: white;
   font-family: 'Roboto Slab', sans-serif;
   letter-spacing: 0.1rem;
@@ -356,10 +354,10 @@ main {
 }
 
 .next--slide {
-  right: 0;
+  right: 0.15rem;
 }
 .prev--slide {
-  left: 0;
+  left: 0.15rem;
 }
 .dots {
   position: absolute;
@@ -395,13 +393,12 @@ main {
   opacity: 1;
 }
 
-.footer {
+.disclaimer {
   position: absolute;
+  top: 36rem;
+  right: 2.25rem;
   font-family: 'Montserrat', sans-serif;
-  top: 20.2rem;
-  left: 8.5rem;
   text-decoration: none;
-  margin-top: -1rem;
   padding-left: 0;
   font-size: 14px;
 }
@@ -415,41 +412,54 @@ a {
   background-color: rgb(114, 110, 110);
   border-radius: 30px;
   border: 3px solid #c6ac8f;
-  top: 22rem;
-  left: 2.65rem;
+  top: 23rem;
+  left: 1.65rem;
   width: 50px;
   height: 30px;
   margin: 0;
   padding: 0;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 .toggle--ball {
   position: absolute;
   background-color: #22333b;
   border-radius: 50%;
-  top: 354px;
-  left: 43.5px;
+  top: 370px;
+  left: 27.8px;
   width: 26.5px;
   height: 26.5px;
   border: 0;
   margin: 0;
   padding: 0;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  z-index: 3;
+  cursor: pointer;
 }
 .toggle--active {
   background-color: #c6ac8f;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .toggle--description {
   position: absolute;
-  top: 22.3rem;
-  left: 6.5rem;
+  top: 40.9rem;
+  left: 5.5rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: white;
   margin: 0;
   padding: 0;
+}
+.footer {
+  position: absolute;
+  bottom: 1.5rem;
+  width: 70%;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  text-align: center;
 }
 .overlay {
   background-color: transparent;

@@ -6,6 +6,8 @@ const taskList = document.querySelector('.task--list');
 const taskItems = document.querySelectorAll('.task--item');
 const taskBox = document.querySelector('.task');
 
+const settingsFooter = document.querySelector('.footer');
+
 const toggleContainer = document.querySelector('.toggle');
 const toggleBackground = document.querySelector('.toggle--container');
 const toggleBall = document.querySelector('.toggle--ball');
@@ -196,7 +198,7 @@ const themeActiveDark = document.querySelector('.theme--active--dark');
 const themeActiveLight = document.querySelector('.theme--active--light');
 
 const settingsHeader = document.querySelector('.settings--header');
-const settingsFooter = document.querySelector('.footer');
+const pexelsDisclaimer = document.querySelector('.disclaimer');
 const themeHeader = document.querySelector('.theme--header');
 const galleryHeader = document.querySelector('.gallery--header');
 const svg = document.querySelectorAll('.svg--alter');
@@ -253,6 +255,7 @@ lightOrDark = () => {
 
   settingsHeader.style.color = light ? 'black' : 'white';
   settingsFooter.style.color = light ? 'black' : 'white';
+  pexelsDisclaimer.style.color = light ? 'black' : 'white';
   themeHeader.style.color = light ? 'black' : 'white';
   galleryHeader.style.color = light ? 'black' : 'white';
   dateHeader.style.color = light ? 'black' : 'white';
