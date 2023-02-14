@@ -200,6 +200,7 @@ const themeActiveDark = document.querySelector('.theme--active--dark');
 const themeActiveLight = document.querySelector('.theme--active--light');
 
 const settingsHeader = document.querySelector('.settings--header');
+const settingsFooter = document.querySelector('.footer');
 const themeHeader = document.querySelector('.theme--header');
 const galleryHeader = document.querySelector('.gallery--header');
 const svg = document.querySelectorAll('.svg--alter');
@@ -223,6 +224,7 @@ darkOrLight = () => {
   chromeDescription.style.color = light ? 'black' : 'white';
 
   settingsHeader.style.color = light ? '#393E46' : 'white';
+  settingsFooter.style.color = light ? '#393E46' : 'white';
   themeHeader.style.color = light ? '#393E46' : 'white';
   galleryHeader.style.color = light ? '#393E46' : 'white';
   dateHeader.style.color = light ? 'black' : 'white';
@@ -232,6 +234,9 @@ darkOrLight = () => {
   taskBox.style.backgroundColor = light ? '#212121' : 'white';
   taskInputText.style.color = light ? 'white' : 'black';
 
+  document.querySelector('.pexels').src = light
+    ? 'https://images.pexels.com/lib/api/pexels.png'
+    : 'https://images.pexels.com/lib/api/pexels-white.png';
   document.querySelector('.feather-corner-down-left').style.stroke = light
     ? 'white'
     : 'black';
