@@ -161,34 +161,6 @@ const settingsConfig = function () {
 };
 settingsConfig();
 
-// BACKGROUND CHANGE
-// const imgContainer = document.querySelectorAll('.img--container');
-
-// imgContainer.forEach(container =>
-//   container.addEventListener('click', function (e) {
-//     console.log(e.target.dataset.src);
-//     if (e.target.classList.contains('bg--img')) {
-//       const htmlBackground = document.querySelector('.html--bg');
-// htmlBackground.style.filter = 'blur(10px)';
-// htmlBackground.src = `${e.target.dataset.src}`;
-// htmlBackground.addEventListener(
-//   'load',
-//   () => (htmlBackground.style.filter = '')
-// );
-//     }
-//   })
-// );
-
-// const nextSlideBtn = document.querySelector('.next--slide');
-// const prevSlideBtn = document.querySelector('.prev--slide');
-
-// nextSlideBtn.addEventListener('click', function () {});
-// prevSlideBtn.addEventListener('click', function () {});
-
-// // imgContainer.forEach(
-// //   (container, i) => (container.style.transform = `translateX(${i * 100}%)`)
-// // );
-
 // CHANGE THEMES ICON ACTIVE
 
 const themes = document.querySelectorAll('.theme');
@@ -235,6 +207,7 @@ const dateHeader = document.querySelector('.date');
 const taskHeader = document.querySelector('h1');
 const chromeDescription = document.querySelector('.chrome--description');
 
+const sliderBtn = document.querySelector('.slider--btn');
 const css = document.createElement('style');
 const changeCSS = () => {
   css.innerHTML = `.task--input::placeholder{color:${
@@ -253,7 +226,6 @@ darkOrLight = () => {
   galleryHeader.style.color = light ? '#393E46' : 'white';
   dateHeader.style.color = light ? 'black' : 'white';
   taskHeader.style.color = light ? 'black' : 'white';
-
   changeCSS();
 
   taskBox.style.backgroundColor = light ? '#212121' : 'white';
@@ -299,7 +271,55 @@ nightMode.addEventListener('click', () => {
   darkOrLight();
 });
 
-// CHOOSE BACKGROUND GALLERY AND SET THE BACKGROUND IMG
-document.querySelector('background').classList.add('bacbgrkound.');
+/////////  CHANGE BACKGROUND /////////////
+const sliderContainer = document.querySelector('.slider--container');
+const sliderImg = document.querySelectorAll('.slider--img');
 
-document.querySelectorAll('background');
+sliderImg.forEach(img =>
+  img.addEventListener('click', function (e) {
+    const imgSource = e.target.dataset.img;
+
+    themeActiveReset();
+    document
+      .querySelector('.gallery--mode')
+      .classList.add(light ? 'theme--active--light' : 'theme--active--dark');
+    htmlBackground.style.filter = 'blur(10px)';
+    htmlBackground.src = imgSource;
+    htmlBackground.addEventListener(
+      'load',
+      () => (htmlBackground.style.filter = '')
+    );
+  })
+);
+
+// CHOOSE BACKGROUND GALLERY AND SET THE BACKGROUND IMG
+
+// MAKE THE TWO ROWS OF GALLERY
+
+// BACKGROUND CHANGE
+// const imgContainer = document.querySelectorAll('.img--container');
+
+// imgContainer.forEach(container =>
+//   container.addEventListener('click', function (e) {
+//     console.log(e.target.dataset.src);
+//     if (e.target.classList.contains('bg--img')) {
+//       const htmlBackground = document.querySelector('.html--bg');
+// htmlBackground.style.filter = 'blur(10px)';
+// htmlBackground.src = `${e.target.dataset.src}`;
+// htmlBackground.addEventListener(
+//   'load',
+//   () => (htmlBackground.style.filter = '')
+// );
+//     }
+//   })
+// );
+
+// const nextSlideBtn = document.querySelector('.next--slide');
+// const prevSlideBtn = document.querySelector('.prev--slide');
+
+// nextSlideBtn.addEventListener('click', function () {});
+// prevSlideBtn.addEventListener('click', function () {});
+
+// // imgContainer.forEach(
+// //   (container, i) => (container.style.transform = `translateX(${i * 100}%)`)
+// // );
