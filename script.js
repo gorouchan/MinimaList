@@ -15,7 +15,7 @@ const toggleBall = document.querySelector('.toggle--ball');
 const todoItem = document.querySelector('.todo--item');
 const todoBtn = document.querySelectorAll('.todo--btn');
 const todoList = [
-  `Take the dog for a walk before sleeping!`,
+  `Take the dog for a walk after dinner!`,
   `Meeting at 3:00PM`,
   'Finish homeworks by Friday',
 ];
@@ -25,6 +25,7 @@ let dark = true;
 let lightOrDark;
 let toggleActive;
 let clock;
+
 // const tasksMain = function () {
 //COUNT TODO ITEMS
 let items = 0;
@@ -35,7 +36,10 @@ const taskCount = function () {
     items <= 1 ? 'task' : 'tasks'
   } today`;
 };
-
+const titleUpdate = () => {
+  document.title = `${items} ${items <= 1 ? 'task' : 'tasks'} today`;
+};
+titleUpdate();
 // DELETE TODO ITEM
 const delTodo = function () {
   document.querySelectorAll('.todo--btn').forEach(btn =>
@@ -46,6 +50,7 @@ const delTodo = function () {
         todoItemEl.remove();
         items--;
         taskCount();
+        titleUpdate();
       }, 650);
     })
   );
@@ -60,6 +65,7 @@ const fadeOut = function () {
 };
 fadeOut();
 //ADD TASK WITH BUTTON OR ENTER KEYS
+
 const addTask = function () {
   if (taskInputText.value === '') return;
   const inputText = taskInputText.value;
@@ -72,6 +78,7 @@ const addTask = function () {
       }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
     taskCount();
+    titleUpdate();
     delTodo();
     //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
     taskInputText.focus();
@@ -90,6 +97,7 @@ const addTask = function () {
   }, 15);
 
   taskCount();
+  titleUpdate();
   taskInputText.value = '';
 };
 const inputBtn = taskBtn.addEventListener('click', addTask);
@@ -109,6 +117,7 @@ const showTodo = function () {
   });
   taskCount();
   delTodo();
+  titleUpdate();
 };
 showTodo();
 taskCount();
@@ -129,11 +138,11 @@ taskInputText.addEventListener('input', function () {
 
 const getTime = () => {
   const time = new Date();
-  const h = String(time.getHours() % 12 || 12).padStart(2, 0);
+  const h = time.getHours() % 12 || 12;
   const m = String(time.getMinutes()).padStart(2, 0);
   const s = String(time.getSeconds()).padStart(2, 0);
 
-  return `${h}:${m}:${s}`;
+  return `${h}:${m}:${s} ${time.getHours() >= 12 ? 'PM' : 'AM'}`;
 };
 getTime();
 const getDate = () => {
