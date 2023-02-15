@@ -36,7 +36,7 @@ body {
 header {
   padding: 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 main {
   display: flex;
@@ -46,23 +46,6 @@ main {
 }
 .todo--btn {
   color: white;
-}
-.chrome {
-  display: flex;
-  width: 30%;
-  gap: 15px;
-}
-.chrome--icon {
-  margin: 0;
-  padding: 0;
-  border-style: none;
-  background-color: transparent;
-}
-.chrome--description {
-  color: white;
-  margin: 0;
-  font-size: 20px;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .settings--icon {
@@ -440,7 +423,8 @@ a {
   background-color: #c6ac8f;
   transition: all 0.2s ease-in-out;
 }
-.toggle--description {
+.toggle--description,
+.clock--text {
   position: absolute;
   top: 40.9rem;
   left: 5.5rem;
@@ -450,6 +434,15 @@ a {
   color: white;
   margin: 0;
   padding: 0;
+}
+.clock--container {
+  top: 25.5rem;
+}
+.clock--text {
+  top: 43.4rem;
+}
+.clock--ball {
+  top: 410px;
 }
 .footer {
   position: absolute;
@@ -477,6 +470,7 @@ a {
   letter-spacing: 0.3rem;
   margin-top: 2rem;
   margin-bottom: 0;
+  transition: all 0.5s ease;
 }
 
 h1 {

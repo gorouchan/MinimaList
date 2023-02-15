@@ -24,6 +24,7 @@ let light;
 let dark = true;
 let lightOrDark;
 let toggleActive;
+let clock;
 // const tasksMain = function () {
 //COUNT TODO ITEMS
 let items = 0;
@@ -124,15 +125,30 @@ taskInputText.addEventListener('input', function () {
 // };
 // tasksMain();
 
-// DATE
+// DATE AND TIME
+
+const getTime = () => {
+  const time = new Date();
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  };
+  return new Intl.DateTimeFormat('default', options).format(time);
+};
+getTime();
+let timeStr = getTime();
 const getDate = () => {
   const date = new Date();
   const newDate = new Intl.DateTimeFormat('en-US', {
     dateStyle: 'full',
-  }).format(date);
-  return (document.querySelector('.date').textContent = newDate
+  })
+    .format(date)
     .slice(0, -6)
-    .toUpperCase());
+    .toUpperCase();
+  return clock
+    ? (document.querySelector('.date').textContent = `${newDate} ${timeStr}`)
+    : (document.querySelector('.date').textContent = `${newDate}`);
 };
 getDate();
 
@@ -197,6 +213,7 @@ const themeContainer = document.querySelector('.theme--container');
 const themeActiveDark = document.querySelector('.theme--active--dark');
 const themeActiveLight = document.querySelector('.theme--active--light');
 
+const clockText = document.querySelector('.clock--text');
 const settingsHeader = document.querySelector('.settings--header');
 const pexelsDisclaimer = document.querySelector('.disclaimer');
 const themeHeader = document.querySelector('.theme--header');
@@ -204,7 +221,6 @@ const galleryHeader = document.querySelector('.gallery--header');
 const svg = document.querySelectorAll('.svg--alter');
 const dateHeader = document.querySelector('.date');
 const taskHeader = document.querySelector('h1');
-const chromeDescription = document.querySelector('.chrome--description');
 const themeDescription = document.querySelector('.theme--description');
 const sliderBtn = document.querySelector('.slider--btn');
 const css = document.createElement('style');
@@ -249,7 +265,6 @@ darkIcon.addEventListener('mouseleave', () =>
 lightOrDark = () => {
   settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'rgb(21,21,21)';
   themeContainer.style.backgroundColor = light ? '#ECE8DD' : 'rgb(41, 41, 41)';
-  chromeDescription.style.color = light ? 'black' : 'white';
   taskBox.style.backgroundColor = light ? '#212121' : 'white';
   taskInputText.style.color = light ? 'white' : 'black';
 
@@ -262,6 +277,7 @@ lightOrDark = () => {
   taskHeader.style.color = light ? 'black' : 'white';
   themeDescription.style.color = light ? 'black' : 'white';
   toggleDescription.style.color = light ? 'black' : 'white';
+  clockText.style.color = light ? 'black' : 'white';
   changeCSS();
 
   //UPLOAD ICON SELECTORS
@@ -295,8 +311,8 @@ lightOrDark = () => {
   if (toggleActive) return;
   htmlBackground.style.filter = 'blur(10px)';
   htmlBackground.src = light
-    ? 'https://images.pexels.com/photos/776656/pexels-photo-776656.jpeg'
-    : 'https://images.pexels.com/photos/296288/pexels-photo-296288.jpeg';
+    ? 'https://images.pexels.com/photos/1166644/pexels-photo-1166644.jpeg'
+    : 'https://images.pexels.com/photos/1074882/pexels-photo-1074882.jpeg';
   htmlBackground.addEventListener(
     'load',
     () => (htmlBackground.style.filter = '')
@@ -427,7 +443,7 @@ dotContainer.addEventListener('click', function (e) {
   }
 });
 
-// TOGGLE DARK/LIGHT MODE AUTOMATIC BACKGROUND CHANGE
+// TOGGLE SETTINGS
 
 const ballBall = () => {
   if (!toggleBackground.classList.contains('toggle--active')) {
@@ -438,7 +454,28 @@ const ballBall = () => {
     toggleActive = false;
   }
 };
-toggleContainer.addEventListener('click', function () {
+toggleContainer.addEventListener('click', () => {
   ballBall();
   toggleBackground.classList.toggle('toggle--active');
+  console.log('working');
+});
+const clockBall = document.querySelector('.clock--ball');
+const clockContainer = document.querySelector('.toggle--clock');
+const clockBackground = document.querySelector('.clock--container');
+const clockClock = () => {
+  if (!clock) {
+    clockBall.style.transform = `translateX(19.8px)`;
+    clock = true;
+    toggleActive = true;
+  } else {
+    clockBall.style.transform = `translateX(0%)`;
+    clock = false;
+    toggleActive = false;
+  }
+};
+
+clockContainer.addEventListener('click', () => {
+  clockClock();
+  getDate();
+  clockBackground.classList.toggle('toggle--active');
 });
