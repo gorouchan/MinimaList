@@ -129,15 +129,13 @@ taskInputText.addEventListener('input', function () {
 
 const getTime = () => {
   const time = new Date();
-  const options = {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  };
-  return new Intl.DateTimeFormat('default', options).format(time);
+  const h = String(time.getHours() % 12 || 12).padStart(2, 0);
+  const m = String(time.getMinutes()).padStart(2, 0);
+  const s = String(time.getSeconds()).padStart(2, 0);
+
+  return `${h}:${m}:${s}`;
 };
 getTime();
-let timeStr = getTime();
 const getDate = () => {
   const date = new Date();
   const newDate = new Intl.DateTimeFormat('en-US', {
@@ -147,10 +145,13 @@ const getDate = () => {
     .slice(0, -6)
     .toUpperCase();
   return clock
-    ? (document.querySelector('.date').textContent = `${newDate} ${timeStr}`)
-    : (document.querySelector('.date').textContent = `${newDate}`);
+    ? (document.querySelector('.date').textContent = `${newDate} `)
+    : (document.querySelector('.date').textContent = `${newDate} ${getTime()}`);
 };
 getDate();
+let clockUpdate = setInterval(() => {
+  getDate();
+}, 1000);
 
 //SETTINGS POPUP
 const settingsConfig = function () {
@@ -477,5 +478,13 @@ const clockClock = () => {
 clockContainer.addEventListener('click', () => {
   clockClock();
   getDate();
+
   clockBackground.classList.toggle('toggle--active');
+  if (clockBackground.classList.contains('toggle--active')) {
+    clearInterval(clockUpdate);
+  } else {
+    clockUpdate = setInterval(() => {
+      getDate();
+    }, 1000);
+  }
 });
