@@ -348,7 +348,6 @@ nightMode.addEventListener('click', () => {
 //UPLOAD IMAGE LOCALLY
 const userImg = document.querySelector('#imgupload');
 let uploadedImg;
-
 uploadIcon.addEventListener('click', function (e) {
   userImg.click();
 });
@@ -357,12 +356,16 @@ document.querySelector('#imgupload').addEventListener('change', () => {
   console.log(userImg.files[0]);
   reader.addEventListener('load', () => {
     uploadedImg = reader.result;
+    localStorage.setItem('user--img', reader.result);
     console.log(uploadedImg);
     htmlBackground.src = uploadedImg;
   });
   reader.readAsDataURL(userImg.files[0]);
 });
-
+document.addEventListener('DOMContentLoaded', () => {
+  const userUpload = localStorage.getItem('user--img');
+  if (userUpload) htmlBackground.src = userUpload;
+});
 /////////  CHANGE BACKGROUND /////////////
 const sliderContainer = document.querySelector('.slider--container');
 const slides = document.querySelectorAll('.slider--img');
