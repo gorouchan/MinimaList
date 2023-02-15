@@ -57,7 +57,7 @@ main {
   border-radius: 8px;
   transition: all 0.3s ease;
   margin: 0;
-  padding: 0.4em;
+  padding: 0.5rem;
 }
 
 .settings--icon:hover {
@@ -371,7 +371,7 @@ main {
 }
 
 .dots__dot--active {
-  background-color: #fff;
+  background-color: #ffffff;
   /* background-color: #888; */
   opacity: 1;
 }
@@ -452,7 +452,20 @@ a {
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
   color: white;
-  text-align: center;
+}
+#coffee-text {
+  left: 3.5rem;
+}
+.feather--coffee {
+  position: absolute;
+  bottom: 0.08rem;
+  left: -2rem;
+}
+.suggestions {
+  right: 1rem;
+  bottom: 1.5rem;
+  width: 15rem;
+  text-align: right;
 }
 .overlay {
   background-color: transparent;
@@ -461,6 +474,7 @@ a {
   z-index: 5;
   width: 100vw;
   height: 100vh;
+  cursor: pointer;
 }
 
 .date {

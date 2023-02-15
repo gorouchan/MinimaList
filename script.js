@@ -250,6 +250,7 @@ const lightDescription = document.querySelector('.light--description');
 const darkIcon = document.querySelector('.night--mode');
 const darkDescription = document.querySelector('.dark--description');
 const toggleDescription = document.querySelector('.toggle--description');
+const suggestions = document.querySelector('.suggestions');
 // Upload Icon Description
 uploadIcon.addEventListener('mouseenter', () =>
   uploadDescription.classList.add('description--active')
@@ -287,7 +288,9 @@ lightOrDark = () => {
   taskHeader.style.color = light ? 'black' : 'white';
   themeDescription.style.color = light ? 'black' : 'white';
   toggleDescription.style.color = light ? 'black' : 'white';
+  suggestions.style.color = light ? 'black' : 'white';
   clockText.style.color = light ? 'black' : 'white';
+
   changeCSS();
 
   //UPLOAD ICON SELECTORS
@@ -295,9 +298,11 @@ lightOrDark = () => {
     ? `center no-repeat url('img/gallery-black.svg')`
     : `center no-repeat url('img/gallery-white.svg')`;
 
-  document.querySelector('a').style.color = light
-    ? 'rgb(168, 100, 54)'
-    : 'wheat';
+  document
+    .querySelectorAll('a')
+    .forEach(
+      link => (link.style.color = light ? 'rgb(168, 100, 54)' : 'wheat')
+    );
 
   document.querySelector('.feather-corner-down-left').style.stroke = light
     ? 'white'
