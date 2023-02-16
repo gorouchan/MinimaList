@@ -14,13 +14,13 @@ const toggleBall = document.querySelector('.toggle--ball');
 
 const todoItem = document.querySelector('.todo--item');
 const todoBtn = document.querySelectorAll('.todo--btn');
-let todoList = JSON.parse(localStorage.getItem('todo--items'));
+let todoList = JSON.parse(localStorage.getItem('todo--items')) || [];
+
 const todoStorage = () => {
   localStorage.setItem('todo--items', JSON.stringify(todoList));
-  let storedTodo = JSON.parse(localStorage.getItem('todo--items'));
-  console.log(storedTodo);
+  console.log(todoList);
 };
-
+console.log(todoList);
 let light;
 let dark = true;
 let lightOrDark;
