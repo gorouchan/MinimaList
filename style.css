@@ -424,7 +424,11 @@ a {
   z-index: 3;
   cursor: pointer;
 }
-.toggle--active {
+.disable-background--active {
+  background-color: #c6ac8f;
+  transition: all 0.2s ease-in-out;
+}
+.clock--active {
   background-color: #c6ac8f;
   transition: all 0.2s ease-in-out;
 }
