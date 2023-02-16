@@ -349,6 +349,7 @@ main {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  z-index: 2;
 }
 
 .dots__dot {
@@ -486,7 +487,9 @@ a {
   margin-bottom: 0;
   transition: all 0.5s ease;
 }
-
+.slider--placeholder {
+  display: none;
+}
 h1 {
   font-size: 45px;
   font-family: 'Poppins', sans-serif;

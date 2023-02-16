@@ -345,46 +345,30 @@ nightMode.addEventListener('click', () => {
   lightOrDark();
 });
 
-//UPLOAD IMAGE LOCALLY
-const userImg = document.querySelector('#imgupload');
-let uploadedImg;
-uploadIcon.addEventListener('click', function (e) {
-  userImg.click();
-});
-document.querySelector('#imgupload').addEventListener('change', () => {
-  const reader = new FileReader();
-  console.log(userImg.files[0]);
-  reader.addEventListener('load', () => {
-    uploadedImg = reader.result;
-    localStorage.setItem('user--img', reader.result);
-    console.log(uploadedImg);
-    htmlBackground.src = uploadedImg;
-  });
-  reader.readAsDataURL(userImg.files[0]);
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const userUpload = localStorage.getItem('user--img');
-  if (userUpload) htmlBackground.src = userUpload;
-});
 /////////  CHANGE BACKGROUND /////////////
 const sliderContainer = document.querySelector('.slider--container');
 const slides = document.querySelectorAll('.slider--img');
 const btnRight = document.querySelector('.next--slide');
 const btnLeft = document.querySelector('.prev--slide');
-
-slides.forEach(img =>
-  img.addEventListener('click', function (e) {
-    const imgSource = e.target.dataset.img;
-    htmlBackground.style.filter = 'blur(10px)';
-    htmlBackground.src = imgSource;
-    htmlBackground.addEventListener(
-      'load',
-      () => (htmlBackground.style.filter = '')
-    );
-  })
-);
-
-// })
+// sliderContainer.insertAdjacentHTML(
+//   'beforeend',
+//   `<img src='https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg' data-img='https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg' class='slider--img slider--${
+//     slides.length + 1
+//   }'>`
+// );
+const loadSlides = () => {
+  slides.forEach(img =>
+    img.addEventListener('click', function (e) {
+      const imgSource = e.target.dataset.img;
+      htmlBackground.style.filter = 'blur(10px)';
+      htmlBackground.src = imgSource;
+      htmlBackground.addEventListener(
+        'load',
+        () => (htmlBackground.style.filter = '')
+      );
+    })
+  );
+};
 
 /////// SLIDER FUNCTION ///////
 let curSlide = 0;
@@ -442,6 +426,7 @@ const init = function () {
   goToSlide(0);
   createDots();
   activateDot(0);
+  loadSlides();
 };
 init();
 
@@ -459,6 +444,29 @@ dotContainer.addEventListener('click', function (e) {
     goToSlide(slide);
     activateDot(slide);
   }
+});
+
+//UPLOAD IMAGE LOCALLY
+const userImg = document.querySelector('#imgupload');
+let uploadedImg;
+uploadIcon.addEventListener('click', () => userImg.click());
+
+document.querySelector('#imgupload').addEventListener('change', () => {
+  const reader = new FileReader();
+  console.log(userImg.files[0]);
+  reader.addEventListener('load', () => {
+    localStorage.setItem('user--img', reader.result);
+    htmlBackground.src = reader.result;
+    goToSlide(0);
+    activateDot(0);
+  });
+  reader.readAsDataURL(userImg.files[0]);
+});
+
+// LOAD THE USER UPLOADED IMAGE UPON DOM LOAD
+document.addEventListener('DOMContentLoaded', () => {
+  const userUpload = localStorage.getItem('user--img');
+  if (userUpload) htmlBackground.src = userUpload;
 });
 
 // TOGGLE SETTINGS

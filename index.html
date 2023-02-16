@@ -190,64 +190,77 @@
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
+        <img src="" data-img="" class="slider--placeholder" />
+        <script>
+          const userUpload = localStorage.getItem('user--img');
+          console.log(userUpload);
+          const placeholder = document.querySelector('.slider--placeholder');
+          if (userUpload) {
+            placeholder.src = userUpload;
+            placeholder.classList.add('slider--img');
+            placeholder.classList.add('slider--1');
+            placeholder.classList.remove('slider--placeholder');
+            placeholder.dataset.img = userUpload;
+          }
+        </script>
         <img
-          class="slider--img slider--1 slider--active"
+          class="slider--img slider--2 slider--active"
           src="https://images.pexels.com/photos/3241963/pexels-photo-3241963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/3241963/pexels-photo-3241963.jpeg"
         />
         <img
-          class="slider--img slider--2"
+          class="slider--img slider--3"
           src="https://images.pexels.com/photos/2902376/pexels-photo-2902376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/2902376/pexels-photo-2902376.jpeg"
         />
         <img
-          class="slider--img slider--3"
+          class="slider--img slider--4"
           src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg"
         />
         <img
-          class="slider--img slider--4"
+          class="slider--img slider--5"
           src="https://images.pexels.com/photos/1095817/pexels-photo-1095817.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/1095817/pexels-photo-1095817.jpeg"
         />
         <img
-          class="slider--img slider--5"
+          class="slider--img slider--6"
           src="https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg"
         />
         <img
-          class="slider--img slider--6"
+          class="slider--img slider--7"
           src="https://images.pexels.com/photos/164005/pexels-photo-164005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/164005/pexels-photo-164005.jpeg"
         />
         <img
-          class="slider--img slider--7"
+          class="slider--img slider--8"
           src="https://images.pexels.com/photos/628281/pexels-photo-628281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/628281/pexels-photo-628281.jpeg"
         />
 
         <img
-          class="slider--img slider--8"
+          class="slider--img slider--9"
           src="https://images.pexels.com/photos/552789/pexels-photo-552789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/552789/pexels-photo-552789.jpeg"
         />
         <img
-          class="slider--img slider--9"
+          class="slider--img slider--10"
           src="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg"
         />
         <img
-          class="slider--img slider--10"
+          class="slider--img slider--11"
           src="https://images.pexels.com/photos/355770/pexels-photo-355770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/355770/pexels-photo-355770.jpeg"
         />
         <img
-          class="slider--img slider--11"
+          class="slider--img slider--12"
           src="https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg"
         />
         <img
-          class="slider--img slider--12"
+          class="slider--img slider--13"
           src="https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           data-img="https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg"
         />
