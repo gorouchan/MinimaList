@@ -360,23 +360,22 @@ const lightOrDark = () => {
     );
 
   //// BACKGROUND
-  if (localStorage.getItem('disable-background--toggle') === 'true') {
-    return;
-  } else {
-    htmlBackground.style.filter = 'blur(10px)';
-    htmlBackground.src =
-      localStorage.getItem('light-mode') === 'true'
-        ? 'img/white-bg.jpeg'
-        : 'img/black-bg.jpeg';
+  if (localStorage.getItem('disable-background--toggle') === 'true') return;
 
-    htmlBackground.addEventListener('load', () => {
-      htmlBackground.style.filter = '';
-      chrome.storage.local.set({ lastBackground: htmlBackground.src }, () => {
-        console.log('set new last background');
-      });
+  htmlBackground.style.filter = 'blur(10px)';
+  htmlBackground.src =
+    localStorage.getItem('light-mode') === 'true'
+      ? 'white-bg.jpeg'
+      : 'black-bg.jpeg';
+
+  htmlBackground.addEventListener('load', () => {
+    htmlBackground.style.filter = '';
+    chrome.storage.local.set({ lastBackground: htmlBackground.src }, () => {
+      console.log('set new last background');
     });
-  }
+  });
 };
+
 lightOrDark();
 lightMode.addEventListener('click', () => {
   // light = true;
@@ -398,21 +397,13 @@ const sliderContainer = document.querySelector('.slider--container');
 const slides = document.querySelectorAll('.slider--img');
 const btnRight = document.querySelector('.next--slide');
 const btnLeft = document.querySelector('.prev--slide');
-// sliderContainer.insertAdjacentHTML(
-//   'beforeend',
-//   `<img src='https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg' data-img='https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg' class='slider--img slider--${
-//     slides.length + 1
-//   }'>`
-// );
+
 const loadSlides = () => {
   slides.forEach(img =>
     img.addEventListener('click', function (e) {
       const imgSource = e.target.dataset.img;
       htmlBackground.style.filter = 'blur(10px)';
       htmlBackground.src = imgSource;
-      chrome.storage.local.set({ lastBackground: htmlBackground.src }, () => {
-        console.log('set new last background');
-      });
 
       htmlBackground.addEventListener(
         'load',
