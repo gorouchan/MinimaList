@@ -283,10 +283,14 @@ main {
   transition: all 0.3s ease-in-out;
 }
 .gallery--mode {
-  background: center no-repeat url('img/gallery-white.svg');
   outline-style: none;
   z-index: 4;
 }
+/* .gallery--mode {
+  background: center no-repeat url('img/gallery-white.svg');
+  outline-style: none;
+  z-index: 4;
+} */
 .slider--container {
   display: flex;
   position: relative;
@@ -485,7 +489,6 @@ a {
   letter-spacing: 0.3rem;
   margin-top: 2rem;
   margin-bottom: 0;
-  transition: all 0.5s ease;
 }
 .slider--placeholder {
   display: none;

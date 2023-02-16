@@ -14,11 +14,12 @@ const toggleBall = document.querySelector('.toggle--ball');
 
 const todoItem = document.querySelector('.todo--item');
 const todoBtn = document.querySelectorAll('.todo--btn');
-const todoList = [
-  `Take the dog for a walk after dinner!`,
-  `Meeting at 3:00PM`,
-  'Finish homeworks by Friday',
-];
+let todoList = JSON.parse(localStorage.getItem('todo--items'));
+const todoStorage = () => {
+  localStorage.setItem('todo--items', JSON.stringify(todoList));
+  let storedTodo = JSON.parse(localStorage.getItem('todo--items'));
+  console.log(storedTodo);
+};
 
 let light;
 let dark = true;
@@ -42,15 +43,18 @@ const titleUpdate = () => {
 titleUpdate();
 // DELETE TODO ITEM
 const delTodo = function () {
-  document.querySelectorAll('.todo--btn').forEach(btn =>
+  document.querySelectorAll('.todo--btn').forEach((btn, i) =>
     btn.addEventListener('click', function (e) {
       const todoItemEl = e.target.closest('.task--item');
+      todoList = todoList.filter(item => item != todoItemEl.textContent);
       e.target.closest('.task--item').classList.remove('show');
+
       setTimeout(() => {
         todoItemEl.remove();
         items--;
         taskCount();
         titleUpdate();
+        todoStorage();
       }, 650);
     })
   );
@@ -80,6 +84,7 @@ const addTask = function () {
     taskCount();
     titleUpdate();
     delTodo();
+    todoStorage();
     //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
     taskInputText.focus();
     // COPYING FROM lightOrDark() so it's not too CPU extensive
@@ -292,11 +297,6 @@ lightOrDark = () => {
   clockText.style.color = light ? 'black' : 'white';
 
   changeCSS();
-
-  //UPLOAD ICON SELECTORS
-  uploadIcon.style.background = light
-    ? `center no-repeat url('img/gallery-black.svg')`
-    : `center no-repeat url('img/gallery-white.svg')`;
 
   document
     .querySelectorAll('a')
