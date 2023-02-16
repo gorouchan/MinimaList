@@ -447,21 +447,33 @@ dotContainer.addEventListener('click', function (e) {
 });
 
 //UPLOAD IMAGE LOCALLY
+const uploadSuccessful = () => {};
 const userImg = document.querySelector('#imgupload');
 let uploadedImg;
+let alerted = false;
 uploadIcon.addEventListener('click', () => userImg.click());
 
 document.querySelector('#imgupload').addEventListener('change', () => {
   const reader = new FileReader();
-  console.log(userImg.files[0]);
   reader.addEventListener('load', () => {
     localStorage.setItem('user--img', reader.result);
     htmlBackground.src = reader.result;
-    goToSlide(0);
-    activateDot(0);
+
+    if (!alerted) {
+      document.querySelector('.modal--overlay').classList.remove('hidden');
+      document.querySelector('.modal--box').classList.add('modal--active');
+      alerted = true;
+    }
   });
   reader.readAsDataURL(userImg.files[0]);
 });
+
+const closeModal = document
+  .querySelector('.feather-x-square')
+  .addEventListener('click', () => {
+    document.querySelector('.modal--box').classList.remove('modal--active');
+    document.querySelector('.modal--overlay').classList.add('hidden');
+  });
 
 // LOAD THE USER UPLOADED IMAGE UPON DOM LOAD
 document.addEventListener('DOMContentLoaded', () => {
