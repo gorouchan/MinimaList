@@ -20,16 +20,8 @@ const todoStorage = () => {
   localStorage.setItem('todo--items', JSON.stringify(todoList));
   console.log(todoList);
 };
-let light;
-let dark = true;
-let lightOrDark;
-let toggleActive;
-// if (localStorage.getItem('clock--toggle') === 'true') {
-//   return
-//   localStorage.setItem('clock--toggle', false);
-// }
+const htmlBackground = document.querySelector('.html--bg');
 
-// const tasksMain = function () {
 //COUNT TODO ITEMS
 let items = 0;
 const taskCount = function () {
@@ -80,7 +72,7 @@ const addTask = function () {
     taskList.insertAdjacentHTML(
       'afterbegin',
       `<div class='task--item '><p class="todo--item">${inputText}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="${
-        dark ? 'black' : 'white'
+        localStorage.getItem('dark-mode') === 'true' ? 'black' : 'white'
       }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
     taskCount();
@@ -92,11 +84,17 @@ const addTask = function () {
     // COPYING FROM lightOrDark() so it's not too CPU extensive
     document
       .querySelectorAll('.todo--item')
-      .forEach(item => (item.style.color = light ? 'white' : 'black'));
+      .forEach(
+        item =>
+          (item.style.color =
+            localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
+      );
     document
       .querySelectorAll('.task--item')
       .forEach(
-        task => (task.style.backgroundColor = light ? '#212121' : 'white')
+        task =>
+          (task.style.backgroundColor =
+            localStorage.getItem('light-mode') === 'true' ? '#212121' : 'white')
       );
   }, 15);
   setTimeout(() => {
@@ -118,7 +116,7 @@ const showTodo = function () {
     taskList.insertAdjacentHTML(
       'afterbegin',
       `<div class='task--item ' ><p class="todo--item">${todo}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="${
-        dark ? 'black' : 'white'
+        localStorage.getItem('dark-mode') === 'true' ? 'black' : 'white'
       }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
   });
@@ -221,7 +219,7 @@ modes.forEach(theme =>
 // CHANGE NIGHT MODE OR LIGHT MODE
 
 const html = document.querySelector('html');
-const htmlBackground = document.querySelector('.html--bg');
+
 const settingsMenu = document.querySelector('.settings--popup');
 
 const nightMode = document.querySelector('.night--mode');
@@ -244,7 +242,7 @@ const css = document.createElement('style');
 
 const changeCSS = () => {
   css.innerHTML = `.task--input::placeholder{color:${
-    light ? 'white' : 'black'
+    localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
   };}`;
   document.body.append(css);
 };
@@ -280,70 +278,118 @@ darkIcon.addEventListener('mouseleave', () =>
   darkDescription.classList.remove('description--active')
 );
 
-lightOrDark = () => {
-  settingsMenu.style.backgroundColor = light ? '#F7F6F2' : 'rgb(21,21,21)';
-  themeContainer.style.backgroundColor = light ? '#ECE8DD' : 'rgb(41, 41, 41)';
-  taskBox.style.backgroundColor = light ? '#212121' : 'white';
-  taskInputText.style.color = light ? 'white' : 'black';
+const lightOrDark = () => {
+  localStorage.getItem('light-mode') === 'true'
+    ? lightIcon.classList.add('theme--active--light')
+    : darkIcon.classList.add('theme--active--dark');
+  settingsMenu.style.backgroundColor =
+    localStorage.getItem('light-mode') === 'true' ? '#F7F6F2' : 'rgb(21,21,21)';
+  themeContainer.style.backgroundColor =
+    localStorage.getItem('light-mode') === 'true'
+      ? '#ECE8DD'
+      : 'rgb(41, 41, 41)';
+  taskBox.style.backgroundColor =
+    localStorage.getItem('light-mode') === 'true' ? '#212121' : 'white';
+  taskInputText.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'white' : 'black';
 
-  settingsHeader.style.color = light ? 'black' : 'white';
-  settingsFooter.style.color = light ? 'black' : 'white';
-  pexelsDisclaimer.style.color = light ? 'black' : 'white';
-  themeHeader.style.color = light ? 'black' : 'white';
-  galleryHeader.style.color = light ? 'black' : 'white';
-  dateHeader.style.color = light ? 'black' : 'white';
-  taskHeader.style.color = light ? 'black' : 'white';
-  themeDescription.style.color = light ? 'black' : 'white';
-  toggleDescription.style.color = light ? 'black' : 'white';
-  suggestions.style.color = light ? 'black' : 'white';
-  clockText.style.color = light ? 'black' : 'white';
+  settingsHeader.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  settingsFooter.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  pexelsDisclaimer.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  themeHeader.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  galleryHeader.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  dateHeader.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  taskHeader.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  themeDescription.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  toggleDescription.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  suggestions.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
+  clockText.style.color =
+    localStorage.getItem('light-mode') === 'true' ? 'black' : 'white';
 
   changeCSS();
 
   document
     .querySelectorAll('a')
     .forEach(
-      link => (link.style.color = light ? 'rgb(168, 100, 54)' : 'wheat')
+      link =>
+        (link.style.color =
+          localStorage.getItem('light-mode') === 'true'
+            ? 'rgb(168, 100, 54)'
+            : 'wheat')
     );
 
-  document.querySelector('.feather-corner-down-left').style.stroke = light
-    ? 'white'
-    : 'black';
+  document.querySelector('.feather-corner-down-left').style.stroke =
+    localStorage.getItem('light-mode') === 'true' ? 'white' : 'black';
   document
     .querySelectorAll('.feather-trash-2')
-    .forEach(btn => (btn.style.stroke = light ? 'white' : 'black'));
+    .forEach(
+      btn =>
+        (btn.style.stroke =
+          localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
+    );
   document
     .querySelectorAll('.svg--alter')
-    .forEach(btn => (btn.style.stroke = light ? 'black' : 'white'));
+    .forEach(
+      btn =>
+        (btn.style.stroke =
+          localStorage.getItem('light-mode') === 'true' ? 'black' : 'white')
+    );
   document
     .querySelectorAll('.todo--item')
-    .forEach(item => (item.style.color = light ? 'white' : 'black'));
+    .forEach(
+      item =>
+        (item.style.color =
+          localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
+    );
   document
     .querySelectorAll('.task--item')
     .forEach(
-      task => (task.style.backgroundColor = light ? '#212121' : 'white')
+      task =>
+        (task.style.backgroundColor =
+          localStorage.getItem('light-mode') === 'true' ? '#212121' : 'white')
     );
 
   //// BACKGROUND
-  if (localStorage.getItem('disable-background--toggle')) return;
-  htmlBackground.style.filter = 'blur(10px)';
-  htmlBackground.src = light
-    ? 'https://images.pexels.com/photos/1166644/pexels-photo-1166644.jpeg'
-    : 'https://images.pexels.com/photos/1074882/pexels-photo-1074882.jpeg';
-  htmlBackground.addEventListener(
-    'load',
-    () => (htmlBackground.style.filter = '')
-  );
-};
+  if (localStorage.getItem('disable-background--toggle') === 'true') {
+    return;
+  } else {
+    htmlBackground.style.filter = 'blur(10px)';
+    htmlBackground.src =
+      localStorage.getItem('light-mode') === 'true'
+        ? 'img/white-bg.jpeg'
+        : 'img/black-bg.jpeg';
 
+    htmlBackground.addEventListener('load', () => {
+      htmlBackground.style.filter = '';
+      chrome.storage.local.set({ lastBackground: htmlBackground.src }, () => {
+        console.log('set new last background');
+      });
+    });
+  }
+};
+lightOrDark();
 lightMode.addEventListener('click', () => {
-  light = true;
-  dark = false;
+  // light = true;
+  // dark = false;
+  localStorage.setItem('light-mode', true);
+  localStorage.setItem('dark-mode', false);
   lightOrDark();
 });
 nightMode.addEventListener('click', () => {
-  dark = true;
-  light = false;
+  // dark = true;
+  // light = false;
+  localStorage.setItem('light-mode', false);
+  localStorage.setItem('dark-mode', true);
   lightOrDark();
 });
 
@@ -364,6 +410,10 @@ const loadSlides = () => {
       const imgSource = e.target.dataset.img;
       htmlBackground.style.filter = 'blur(10px)';
       htmlBackground.src = imgSource;
+      chrome.storage.local.set({ lastBackground: htmlBackground.src }, () => {
+        console.log('set new last background');
+      });
+
       htmlBackground.addEventListener(
         'load',
         () => (htmlBackground.style.filter = '')
@@ -452,19 +502,32 @@ dotContainer.addEventListener('click', function (e) {
 const uploadSuccessful = () => {};
 const userImg = document.querySelector('#imgupload');
 let uploadedImg;
-let alerted = false;
-uploadIcon.addEventListener('click', () => userImg.click());
 
+uploadIcon.addEventListener('click', () => userImg.click());
 document.querySelector('#imgupload').addEventListener('change', () => {
   const reader = new FileReader();
   reader.addEventListener('load', () => {
-    localStorage.setItem('user--img', reader.result);
-    htmlBackground.src = reader.result;
+    chrome.storage.local.set({ userUploadedImg: reader.result }, () => {
+      console.log('Value is set to ' + reader.result);
+    });
+    chrome.storage.local.get(['userUploadedImg'], function (result) {
+      console.log('working', result.userUploadedImg);
+      htmlBackground.src = result.userUploadedImg;
 
-    if (!alerted) {
+      // set the uploaded image to lastBackground
+      chrome.storage.local.set(
+        { lastBackground: result.userUploadedImg },
+        () => {
+          console.log('set new last background');
+        }
+      );
+    });
+
+    //RETURN ALERTED TRUE AFTER SHOWING WARNING MODAL ONCE
+    if (localStorage.getItem('alerted') !== 'true') {
       document.querySelector('.modal--overlay').classList.remove('hidden');
       document.querySelector('.modal--box').classList.add('modal--active');
-      alerted = true;
+      localStorage.setItem('alerted', true);
     }
   });
   reader.readAsDataURL(userImg.files[0]);
@@ -476,12 +539,6 @@ const closeModal = document
     document.querySelector('.modal--box').classList.remove('modal--active');
     document.querySelector('.modal--overlay').classList.add('hidden');
   });
-
-// LOAD THE USER UPLOADED IMAGE UPON DOM LOAD
-document.addEventListener('DOMContentLoaded', () => {
-  const userUpload = localStorage.getItem('user--img');
-  if (userUpload) htmlBackground.src = userUpload;
-});
 
 // TOGGLE SETTINGS
 

@@ -8,11 +8,8 @@
     <title>Document</title>
   </head>
 
-  <img
-    src="https://images.pexels.com/photos/1074882/pexels-photo-1074882.jpeg"
-    alt=" background image"
-    class="html--bg"
-  />
+  <img class="html--bg" />
+  <script src="background.js"></script>
   <body>
     <header>
       <div class="settings">
@@ -39,7 +36,7 @@
     </header>
     <main>
       <p class="date"></p>
-      <h1>You have 1 task today</h1>
+      <h1></h1>
       <div class="task">
         <div>
           <input
@@ -131,7 +128,7 @@
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
         </button>
-        <button class="theme mode theme--active--dark night--mode">
+        <button class="theme mode night--mode">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -188,17 +185,7 @@
           </svg>
         </button>
         <img src="" data-img="" class="slider--placeholder" />
-        <script>
-          const userUpload = localStorage.getItem('user--img');
-          const placeholder = document.querySelector('.slider--placeholder');
-          if (userUpload) {
-            placeholder.src = userUpload;
-            placeholder.classList.add('slider--img');
-            placeholder.classList.add('slider--1');
-            placeholder.classList.remove('slider--placeholder');
-            placeholder.dataset.img = userUpload;
-          }
-        </script>
+
         <img
           class="slider--img slider--2"
           src="https://images.pexels.com/photos/3241963/pexels-photo-3241963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -273,24 +260,6 @@
           <div class="toggle--option toggle--container clock--container"></div>
           <div class="toggle--option toggle--ball clock--ball"></div>
         </div>
-        <script>
-          if (localStorage.getItem('clock--toggle') === 'true') {
-            document.querySelector(
-              '.clock--ball'
-            ).style.transform = `translateX(19.8px)`;
-            document
-              .querySelector('.clock--container')
-              .classList.add('clock--active');
-          }
-          if (localStorage.getItem('disable-background--toggle') === 'true') {
-            document.querySelector(
-              '.toggle--ball'
-            ).style.transform = `translateX(19.8px)`;
-            document
-              .querySelector('.disable-background--container')
-              .classList.add('disable-background--active');
-          }
-        </script>
       </div>
       <p class="disclaimer">
         Photos provided by
@@ -357,6 +326,7 @@
     <div class="modal--overlay hidden"></div>
     <div class="overlay hidden" title="Click to close the settings"></div>
   </body>
-
+  <script src="toggle.js"></script>
+  <script src="slider.js"></script>
   <script src="script.js"></script>
 </html>

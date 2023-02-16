@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Minimalist New Tab",
+  "version": "1.0",
+  "description": "The latest Hacker Noon tech stories.",
+  "author": "Hacker Noon",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage", "unlimitedStorage", "tabs"],
+  "icons": {
+    "16": "img/icon-16.svg",
+    "32": "img/icon-32.svg",
+    "48": "img/icon-48.svg",
+    "128": "img/icon-128.svg"
+  }
+}
