@@ -264,13 +264,33 @@
         <div class="dots"></div>
 
         <div class="toggle">
-          <div class="toggle--option toggle--container"></div>
+          <div
+            class="toggle--option toggle--container disable-background--container"
+          ></div>
           <div class="toggle--option toggle--ball"></div>
         </div>
         <div class="toggle--clock">
           <div class="toggle--option toggle--container clock--container"></div>
           <div class="toggle--option toggle--ball clock--ball"></div>
         </div>
+        <script>
+          if (localStorage.getItem('clock--toggle') === 'true') {
+            document.querySelector(
+              '.clock--ball'
+            ).style.transform = `translateX(19.8px)`;
+            document
+              .querySelector('.clock--container')
+              .classList.add('clock--active');
+          }
+          if (localStorage.getItem('disable-background--toggle') === 'true') {
+            document.querySelector(
+              '.toggle--ball'
+            ).style.transform = `translateX(19.8px)`;
+            document
+              .querySelector('.disable-background--container')
+              .classList.add('disable-background--active');
+          }
+        </script>
       </div>
       <p class="disclaimer">
         Photos provided by

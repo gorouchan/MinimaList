@@ -20,12 +20,14 @@ const todoStorage = () => {
   localStorage.setItem('todo--items', JSON.stringify(todoList));
   console.log(todoList);
 };
-console.log(todoList);
 let light;
 let dark = true;
 let lightOrDark;
 let toggleActive;
-let clock;
+// if (localStorage.getItem('clock--toggle') === 'true') {
+//   return
+//   localStorage.setItem('clock--toggle', false);
+// }
 
 // const tasksMain = function () {
 //COUNT TODO ITEMS
@@ -158,7 +160,7 @@ const getDate = () => {
     .format(date)
     .slice(0, -6)
     .toUpperCase();
-  return clock
+  return localStorage.getItem('clock--toggle') === 'true'
     ? (document.querySelector('.date').textContent = `${newDate} `)
     : (document.querySelector('.date').textContent = `${newDate} ${getTime()}`);
 };
@@ -323,7 +325,7 @@ lightOrDark = () => {
     );
 
   //// BACKGROUND
-  if (toggleActive) return;
+  if (localStorage.getItem('disable-background--toggle')) return;
   htmlBackground.style.filter = 'blur(10px)';
   htmlBackground.src = light
     ? 'https://images.pexels.com/photos/1166644/pexels-photo-1166644.jpeg'
@@ -484,31 +486,35 @@ document.addEventListener('DOMContentLoaded', () => {
 // TOGGLE SETTINGS
 
 const ballBall = () => {
-  if (!toggleBackground.classList.contains('toggle--active')) {
+  if (
+    localStorage.getItem('disable-background--toggle') === null ||
+    localStorage.getItem('disable-background--toggle') === 'false'
+  ) {
     toggleBall.style.transform = `translateX(19.8px)`;
-    toggleActive = true;
+    localStorage.setItem('disable-background--toggle', true);
   } else {
     toggleBall.style.transform = `translateX(0%)`;
-    toggleActive = false;
+    localStorage.setItem('disable-background--toggle', false);
   }
 };
 toggleContainer.addEventListener('click', () => {
   ballBall();
-  toggleBackground.classList.toggle('toggle--active');
-  console.log('working');
+  toggleBackground.classList.toggle('disable-background--active');
 });
 const clockBall = document.querySelector('.clock--ball');
 const clockContainer = document.querySelector('.toggle--clock');
 const clockBackground = document.querySelector('.clock--container');
+
 const clockClock = () => {
-  if (!clock) {
+  if (
+    localStorage.getItem('clock--toggle') === null ||
+    localStorage.getItem('clock--toggle') === 'false'
+  ) {
     clockBall.style.transform = `translateX(19.8px)`;
-    clock = true;
-    toggleActive = true;
+    localStorage.setItem('clock--toggle', true);
   } else {
     clockBall.style.transform = `translateX(0%)`;
-    clock = false;
-    toggleActive = false;
+    localStorage.setItem('clock--toggle', false);
   }
 };
 
@@ -516,8 +522,8 @@ clockContainer.addEventListener('click', () => {
   clockClock();
   getDate();
 
-  clockBackground.classList.toggle('toggle--active');
-  if (clockBackground.classList.contains('toggle--active')) {
+  clockBackground.classList.toggle('clock--active');
+  if (clockBackground.classList.contains('clock--active')) {
     clearInterval(clockUpdate);
   } else {
     clockUpdate = setInterval(() => {
