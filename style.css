@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&family=Vollkorn:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 *,
 *::before,
 *::after {
@@ -43,6 +47,7 @@ main {
   flex-direction: column;
   align-items: center;
   color: azure;
+  margin-top: -30px;
 }
 .todo--btn {
   color: white;
@@ -78,7 +83,7 @@ main {
   width: 50vw;
   opacity: 0.5;
   /* overflow: hidden; */
-
+  margin-top: -2rem;
   transition: background-color 1s ease, opacity 1s ease;
 }
 .hover {
@@ -96,9 +101,8 @@ main {
   padding-left: 3rem;
   border-style: none;
   background-color: transparent;
-  font-size: 30px;
-  font-family: 'Titillium Web', sans-serif;
-  font-weight: 600;
+  font-size: 2rem;
+  font-family: 'Roboto Slab', sans-serif;
   width: 40vw;
 }
 .task--input::placeholder {
@@ -120,7 +124,7 @@ main {
 .task--list {
   background-color: transparent;
   color: black;
-  margin-top: 1.3rem;
+  margin-top: 0.5rem;
   height: 50vh;
   width: 100%;
   overflow-y: auto;
@@ -135,7 +139,7 @@ main {
   justify-content: space-between;
   align-items: center;
   line-height: 2rem;
-  font-size: 25px;
+  font-size: 2rem;
   margin-top: 0.3rem;
   border-radius: 15px;
   transform: translateX(150%);
@@ -165,9 +169,11 @@ main {
   margin: 0;
   padding: 0.8rem;
   padding-left: 3rem;
-  font-size: 25px;
-  font-family: 'Titillium Web', sans-serif;
-  font-weight: 600;
+  font-size: 2rem;
+  font-family: 'Roboto Slab', sans-serif;
+
+  color: black;
+  opacity: 1;
 }
 
 .settings--popup {
@@ -555,6 +561,7 @@ h1 {
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.3rem;
   margin-bottom: 3rem;
+  font-weight: 600;
 }
 
 @keyframes slide-in {
