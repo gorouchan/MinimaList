@@ -128,6 +128,7 @@ main {
   height: 50vh;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 40%;
   padding-left: 10%;
   transform: translateX(15%);
@@ -139,7 +140,6 @@ main {
   justify-content: space-between;
   align-items: center;
   line-height: 2rem;
-  font-size: 2rem;
   margin-top: 0.3rem;
   border-radius: 15px;
   transform: translateX(150%);
