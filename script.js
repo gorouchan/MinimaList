@@ -23,16 +23,8 @@ const todoStorage = () => {
 const htmlBackground = document.querySelector('.html--bg');
 
 let strikedList;
-
-//COUNT TODO ITEMS
 let items = 0;
-const taskCount = function () {
-  items = 0;
-  document.querySelectorAll('.task--item').forEach(() => items++);
-  document.querySelector('h1').textContent = `You have ${items} ${
-    items <= 1 ? 'task' : 'tasks'
-  } today`;
-};
+
 const titleUpdate = () => {
   document.title = `${items} ${items <= 1 ? 'task' : 'tasks'} today`;
 };
@@ -52,7 +44,7 @@ const delTodo = function () {
         todoList = newTodo.reverse();
         todoStorage();
         items--;
-        taskCount();
+        checkStrike();
         titleUpdate();
         strikedList = [];
         document.querySelectorAll('.todo--item').forEach(todo => {
@@ -101,6 +93,16 @@ const addTask = function () {
       localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
     }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
   );
+  strikedList = [];
+  document.querySelectorAll('.todo--item').forEach(todo => {
+    if (todo.classList.contains('strike')) {
+      strikedList.push('true');
+    } else {
+      strikedList.push('false');
+    }
+    console.log(strikedList);
+  });
+  localStorage.setItem('strike--list', strikedList);
   document
     .querySelectorAll('.todo--item')
     .forEach(
@@ -117,7 +119,6 @@ const addTask = function () {
     );
   preventEnter();
 
-  taskCount();
   titleUpdate();
   delTodo();
 
@@ -131,7 +132,7 @@ const addTask = function () {
   setTimeout(() => {
     fadeOut();
   }, 15);
-  taskCount();
+  checkStrike();
   titleUpdate();
   taskInputText.value = '';
 };
@@ -151,10 +152,6 @@ const checkBox = () => {
         .closest('#check-box')
         .children.item(1)
         .classList.toggle('checked');
-      console.log(
-        e.target.closest('#task--box').children.item(1),
-        e.target.closest('#check-box').children.item(1)
-      );
       strikedList = [];
       document.querySelectorAll('.todo--item').forEach(todo => {
         if (todo.classList.contains('strike')) {
@@ -165,10 +162,40 @@ const checkBox = () => {
         // console.log(strikedList);
       });
       localStorage.setItem('strike--list', strikedList);
+      checkStrike();
     })
   );
 };
-checkBox();
+const checkStrike = () => {
+  document.querySelectorAll('.todo--item').forEach((todo, i) => {
+    const lol = localStorage.getItem('strike--list')?.split(',');
+    if (lol === undefined) return;
+    if (lol !== undefined && lol[i] === 'true') {
+      todo.classList.add('strike');
+    }
+
+    items = 0;
+    lol.forEach(checked => (checked === 'false' ? items++ : items));
+    document.querySelector('h1').textContent = `You have ${items} ${
+      items <= 1 ? 'task' : 'tasks'
+    } today`;
+    titleUpdate();
+  });
+  document.querySelectorAll('.feather-check').forEach((check, i) => {
+    const lol = localStorage.getItem('strike--list')?.split(',');
+    if (lol === undefined) return;
+    if (lol[i] === 'true') {
+      check.classList.add('checked');
+    }
+    items = 0;
+    lol.forEach(checked => (checked === 'false' ? items++ : items));
+    document.querySelector('h1').textContent = `You have ${items} ${
+      items <= 1 ? 'task' : 'tasks'
+    } today`;
+    titleUpdate();
+  });
+};
+checkStrike();
 // SHOW THE TODO LIST IN EXISTING ARRAY
 const showTodo = function () {
   todoList.forEach(todo => {
@@ -189,12 +216,12 @@ const showTodo = function () {
       }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
   });
-  taskCount();
   delTodo();
   titleUpdate();
+  checkBox();
+  checkStrike();
 };
 showTodo();
-taskCount();
 
 /// LISTEN FOR CHANGES IN THE TASK ITEMS
 
@@ -226,23 +253,6 @@ preventEnter();
 
 // CHECK BUTTON
 
-const checkStrike = () => {
-  document.querySelectorAll('.todo--item').forEach((todo, i) => {
-    const lol = localStorage.getItem('strike--list').split(',');
-    if (lol[i] === 'true') {
-      todo.classList.add('strike');
-    }
-    console.log(lol[i]);
-  });
-  document.querySelectorAll('.feather-check').forEach((check, i) => {
-    const lol = localStorage.getItem('strike--list').split(',');
-    if (lol[i] === 'true') {
-      check.classList.add('checked');
-    }
-    console.log(lol[i]);
-  });
-};
-checkStrike();
 let timer;
 taskInputText.addEventListener('input', function () {
   const taskBar = document.querySelector('.task');
