@@ -82,7 +82,6 @@ main {
   margin-bottom: 10px;
   width: 50vw;
   opacity: 0.5;
-  /* overflow: hidden; */
   margin-top: -2rem;
   transition: background-color 1s ease, opacity 1s ease;
 }
@@ -98,12 +97,13 @@ main {
 .task--input {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 3rem;
+  padding-left: 3.9rem;
   border-style: none;
   background-color: transparent;
   font-size: 2rem;
   font-family: 'Roboto Slab', sans-serif;
   width: 40vw;
+  flex-grow: 5;
 }
 .task--input::placeholder {
   color: black;
@@ -129,9 +129,9 @@ main {
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 40%;
-  padding-left: 10%;
-  transform: translateX(15%);
+  /* padding-right: 40%;
+  padding-left: 10%; */
+  /* transform: translateX(15%); */
 }
 
 .task--item {
@@ -145,6 +145,8 @@ main {
   transform: translateX(150%);
   transition: all 0.5s cubic-bezier(0.34, -0.03, 0.94, -0.33);
   opacity: 0.5;
+  width: 50%;
+  margin-left: 25%;
 }
 
 .show {
@@ -168,14 +170,45 @@ main {
 .todo--item {
   margin: 0;
   padding: 0.8rem;
-  padding-left: 3rem;
+  padding-left: 4rem;
   font-size: 2rem;
   font-family: 'Roboto Slab', sans-serif;
-
   color: black;
   opacity: 1;
+  flex-grow: 5;
 }
-
+.check--box {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  left: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  z-index: 3;
+}
+.strike {
+  text-decoration-line: line-through;
+}
+.feather-square,
+.feather-check {
+  position: absolute;
+}
+.feather-check {
+  display: none;
+}
+.checked {
+  display: block;
+}
+.p:read-write {
+  outline-style: none;
+  border-style: none;
+}
+.p:active {
+  outline-style: none;
+}
 .settings--popup {
   position: absolute;
   display: flex;

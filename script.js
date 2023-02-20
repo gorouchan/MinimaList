@@ -22,6 +22,8 @@ const todoStorage = () => {
 };
 const htmlBackground = document.querySelector('.html--bg');
 
+let strikedList;
+
 //COUNT TODO ITEMS
 let items = 0;
 const taskCount = function () {
@@ -37,19 +39,32 @@ const titleUpdate = () => {
 titleUpdate();
 // DELETE TODO ITEM
 const delTodo = function () {
-  document.querySelectorAll('.todo--btn').forEach((btn, i) =>
+  document.querySelectorAll('.todo--btn').forEach(btn =>
     btn.addEventListener('click', function (e) {
-      const todoItemEl = e.target.closest('.task--item');
-      todoList = todoList.filter(item => item != todoItemEl.textContent);
       e.target.closest('.task--item').classList.remove('show');
 
       setTimeout(() => {
-        todoItemEl.remove();
+        e.target.closest('.task--item').remove();
+        let newTodo = [];
+        document.querySelectorAll('.todo--item').forEach(todo => {
+          newTodo.push(todo.textContent);
+        });
+        todoList = newTodo.reverse();
+        todoStorage();
         items--;
         taskCount();
         titleUpdate();
-        todoStorage();
-      }, 650);
+        strikedList = [];
+        document.querySelectorAll('.todo--item').forEach(todo => {
+          if (todo.classList.contains('strike')) {
+            strikedList.push('true');
+          } else {
+            strikedList.push('false');
+          }
+          console.log(strikedList);
+        });
+        localStorage.setItem('strike--list', strikedList);
+      }, 500);
     })
   );
 };
@@ -71,17 +86,20 @@ const addTask = function () {
   setTimeout(() => {
     taskList.insertAdjacentHTML(
       'afterbegin',
-      `<div class='task--item '><p class="todo--item">${inputText}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" fill="none" stroke="${
+      `<div class='task--item' id="task--box" >
+      <div class="check--box" id="check-box">
+      <svg xmlns="http://www.w3.org/2000/svg" "width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${
+        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" "width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${
+        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="check-btn"class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <p contenteditable class="todo--item" style="outline-style:none;">${inputText}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" fill="none" stroke="${
         localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
       }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
-    taskCount();
-    titleUpdate();
-    delTodo();
-    todoStorage();
-    //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
-    taskInputText.focus();
-    // COPYING FROM lightOrDark() so it's not too CPU extensive
     document
       .querySelectorAll('.todo--item')
       .forEach(
@@ -96,17 +114,39 @@ const addTask = function () {
           (task.style.backgroundColor =
             localStorage.getItem('light-mode') === 'true' ? '#212121' : 'white')
       );
+    preventEnter();
+
+    taskCount();
+    titleUpdate();
+    delTodo();
+
+    editTasks();
+    checkBox();
+    todoStorage();
+    //check
+    strikedList = [];
+    document.querySelectorAll('.todo--item').forEach(todo => {
+      if (todo.classList.contains('strike')) {
+        strikedList.push('true');
+      } else {
+        strikedList.push('false');
+      }
+      console.log(strikedList);
+    });
+    localStorage.setItem('strike--list', strikedList);
+    //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
+    taskInputText.focus();
+    // COPYING FROM lightOrDark() so it's not too CPU extensive
   }, 15);
   setTimeout(() => {
     fadeOut();
   }, 15);
-
   taskCount();
   titleUpdate();
   taskInputText.value = '';
 };
 const inputBtn = taskBtn.addEventListener('click', addTask);
-const enterTask = window.addEventListener('keydown', function (e) {
+const enterTask = taskInputText.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') addTask();
 });
 
@@ -115,7 +155,17 @@ const showTodo = function () {
   todoList.forEach(todo => {
     taskList.insertAdjacentHTML(
       'afterbegin',
-      `<div class='task--item ' ><p class="todo--item">${todo}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" fill="none" stroke="${
+      `<div class='task--item' id="task--box" >
+      <div class="check--box" id="check-box">
+      <svg xmlns="http://www.w3.org/2000/svg" "width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${
+        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" "width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${
+        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="check-btn"class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <p contenteditable class="todo--item" style="outline-style:none;">${todo}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" fill="none" stroke="${
         localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
       }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
     );
@@ -127,6 +177,79 @@ const showTodo = function () {
 showTodo();
 taskCount();
 
+/// LISTEN FOR CHANGES IN THE TASK ITEMS
+
+const editTasks = () => {
+  document.querySelectorAll('.todo--item').forEach(item =>
+    item.addEventListener('keyup', function (e) {
+      let newTodo = [];
+      document.querySelectorAll('.todo--item').forEach(todo => {
+        newTodo.push(todo.textContent);
+      });
+      todoList = newTodo.reverse();
+      todoStorage();
+    })
+  );
+};
+editTasks();
+
+const preventEnter = () => {
+  document.querySelectorAll('.todo--item').forEach(todo =>
+    todo.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        todo.blur();
+      }
+    })
+  );
+};
+preventEnter();
+
+// CHECK BUTTON
+const checkBox = () => {
+  document.querySelectorAll('.check--box').forEach(check =>
+    check.addEventListener('click', function (e) {
+      console.log('wokring');
+      e.target
+        .closest('#task--box')
+        .children.item(1)
+        .classList.toggle('strike');
+      e.target
+        .closest('#check-box')
+        .children.item(1)
+        .classList.toggle('checked');
+
+      strikedList = [];
+      document.querySelectorAll('.todo--item').forEach(todo => {
+        if (todo.classList.contains('strike')) {
+          strikedList.push('true');
+        } else {
+          strikedList.push('false');
+        }
+        console.log(strikedList);
+      });
+      localStorage.setItem('strike--list', strikedList);
+    })
+  );
+};
+checkBox();
+const checkStrike = () => {
+  document.querySelectorAll('.todo--item').forEach((todo, i) => {
+    const lol = localStorage.getItem('strike--list').split(',');
+    if (lol[i] === 'true') {
+      todo.classList.add('strike');
+    }
+    console.log(lol[i]);
+  });
+  document.querySelectorAll('.feather-check').forEach((check, i) => {
+    const lol = localStorage.getItem('strike--list').split(',');
+    if (lol[i] === 'true') {
+      check.classList.add('checked');
+    }
+    console.log(lol[i]);
+  });
+};
+checkStrike();
 let timer;
 taskInputText.addEventListener('input', function () {
   const taskBar = document.querySelector('.task');
@@ -136,8 +259,6 @@ taskInputText.addEventListener('input', function () {
     taskBar.classList.remove('hover');
   }, 2500);
 });
-// };
-// tasksMain();
 
 // DATE AND TIME
 
@@ -332,6 +453,20 @@ const lightOrDark = () => {
     localStorage.getItem('light-mode') === 'true' ? 'white' : 'black';
   document
     .querySelectorAll('.feather-trash-2')
+    .forEach(
+      btn =>
+        (btn.style.stroke =
+          localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
+    );
+  document
+    .querySelectorAll('.feather-check')
+    .forEach(
+      btn =>
+        (btn.style.stroke =
+          localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
+    );
+  document
+    .querySelectorAll('.feather-square')
     .forEach(
       btn =>
         (btn.style.stroke =
