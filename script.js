@@ -83,61 +83,51 @@ const addTask = function () {
   if (taskInputText.value === '') return;
   const inputText = taskInputText.value;
   todoList.push(inputText);
-  setTimeout(() => {
-    taskList.insertAdjacentHTML(
-      'afterbegin',
-      `<div class='task--item' id="task--box" >
-      <div class="check--box" id="check-box">
-      <svg xmlns="http://www.w3.org/2000/svg" "width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${
-        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
-      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
-      
-      <svg xmlns="http://www.w3.org/2000/svg" "width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${
-        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
-      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="check-btn"class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      </div>
-      <p contenteditable class="todo--item" style="outline-style:none;">${inputText}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" fill="none" stroke="${
-        localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
-      }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
+  checkBox();
+
+  taskList.insertAdjacentHTML(
+    'afterbegin',
+    `<div class='task--item' id="task--box" >
+    <div class="check--box" id="check-box">
+    <svg xmlns="http://www.w3.org/2000/svg" "width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${
+      localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+    }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" "width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${
+      localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+    }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="check-btn"class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <p contenteditable class="todo--item" style="outline-style:none;">${inputText}</p><button class="todo--btn"><svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" fill="none" stroke="${
+      localStorage.getItem('light-mode') === 'true' ? 'white' : 'black'
+    }" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button></div>`
+  );
+  document
+    .querySelectorAll('.todo--item')
+    .forEach(
+      item =>
+        (item.style.color =
+          localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
     );
-    document
-      .querySelectorAll('.todo--item')
-      .forEach(
-        item =>
-          (item.style.color =
-            localStorage.getItem('light-mode') === 'true' ? 'white' : 'black')
-      );
-    document
-      .querySelectorAll('.task--item')
-      .forEach(
-        task =>
-          (task.style.backgroundColor =
-            localStorage.getItem('light-mode') === 'true' ? '#212121' : 'white')
-      );
-    preventEnter();
+  document
+    .querySelectorAll('.task--item')
+    .forEach(
+      task =>
+        (task.style.backgroundColor =
+          localStorage.getItem('light-mode') === 'true' ? '#212121' : 'white')
+    );
+  preventEnter();
 
-    taskCount();
-    titleUpdate();
-    delTodo();
+  taskCount();
+  titleUpdate();
+  delTodo();
 
-    editTasks();
-    checkBox();
-    todoStorage();
-    //check
-    strikedList = [];
-    document.querySelectorAll('.todo--item').forEach(todo => {
-      if (todo.classList.contains('strike')) {
-        strikedList.push('true');
-      } else {
-        strikedList.push('false');
-      }
-      console.log(strikedList);
-    });
-    localStorage.setItem('strike--list', strikedList);
-    //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
-    taskInputText.focus();
-    // COPYING FROM lightOrDark() so it's not too CPU extensive
-  }, 15);
+  editTasks();
+  checkBox();
+  todoStorage();
+
+  //ADD FOCUS TO TEXTAREA AFTER ADDING A TASK
+  taskInputText.focus();
+  // COPYING FROM lightOrDark() so it's not too CPU extensive
   setTimeout(() => {
     fadeOut();
   }, 15);
@@ -149,7 +139,36 @@ const inputBtn = taskBtn.addEventListener('click', addTask);
 const enterTask = taskInputText.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') addTask();
 });
+const checkBox = () => {
+  document.querySelectorAll('.check--box').forEach(check =>
+    check.addEventListener('click', function (e) {
+      e.target
+        .closest('#task--box')
+        .children.item(1)
+        .classList.toggle('strike');
 
+      e.target
+        .closest('#check-box')
+        .children.item(1)
+        .classList.toggle('checked');
+      console.log(
+        e.target.closest('#task--box').children.item(1),
+        e.target.closest('#check-box').children.item(1)
+      );
+      strikedList = [];
+      document.querySelectorAll('.todo--item').forEach(todo => {
+        if (todo.classList.contains('strike')) {
+          strikedList.push('true');
+        } else {
+          strikedList.push('false');
+        }
+        // console.log(strikedList);
+      });
+      localStorage.setItem('strike--list', strikedList);
+    })
+  );
+};
+checkBox();
 // SHOW THE TODO LIST IN EXISTING ARRAY
 const showTodo = function () {
   todoList.forEach(todo => {
@@ -206,33 +225,7 @@ const preventEnter = () => {
 preventEnter();
 
 // CHECK BUTTON
-const checkBox = () => {
-  document.querySelectorAll('.check--box').forEach(check =>
-    check.addEventListener('click', function (e) {
-      console.log('wokring');
-      e.target
-        .closest('#task--box')
-        .children.item(1)
-        .classList.toggle('strike');
-      e.target
-        .closest('#check-box')
-        .children.item(1)
-        .classList.toggle('checked');
 
-      strikedList = [];
-      document.querySelectorAll('.todo--item').forEach(todo => {
-        if (todo.classList.contains('strike')) {
-          strikedList.push('true');
-        } else {
-          strikedList.push('false');
-        }
-        console.log(strikedList);
-      });
-      localStorage.setItem('strike--list', strikedList);
-    })
-  );
-};
-checkBox();
 const checkStrike = () => {
   document.querySelectorAll('.todo--item').forEach((todo, i) => {
     const lol = localStorage.getItem('strike--list').split(',');
